@@ -4,6 +4,11 @@
 <meta name="author" content="{{ site.author }}">
 <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
 
+<!-- Google AdSense Site Verification -->
+{% if site.google_site_verification %}
+<meta name="google-site-verification" content="{{ site.google_site_verification }}" />
+{% endif %}
+
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 
@@ -75,6 +80,9 @@
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/newsletter-popup.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/enhancements.css' | relative_url }}">
+<!-- Google AdSense Auto Ads -->
+{% include adsense-auto-ads.html %}
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">

@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 """
 Script para generar artículos de blog automáticamente usando APIs de IA gratuitas.
-Utiliza Groq API (gratuita) para generación de texto.
+Utiliza Groq API (gratuita) para generación de texto y Unsplash API para imágenes.
+Incluye límite diario de 5 posts y auto-commit a GitHub.
 """
 
 import os
 import argparse
 import json
-from datetime import datetime
+from datetime import datetime, date
 from groq import Groq
 import re
 from pathlib import Path
+import subprocess
+import requests
+import glob
 
 # Cargar variables de entorno desde .env
 try:
@@ -198,35 +202,142 @@ Este es un artículo sobre {topic}.
 
 Este artículo cubre los aspectos fundamentales de {topic}."""
 
-def generate_image_suggestion(topic, category):
-    """Genera sugerencia de imagen basada en el tema."""
-    suggestions = {
-        'ia': [
-            f"Imagen conceptual de {topic}",
-            "Robot o cerebro artificial",
-            "Interfaz futurista de IA",
-            "Código con elementos visuales de machine learning"
-        ],
-        'blockchain': [
-            f"Ilustración de {topic}",
-            "Cadena de bloques visual",
-            "Gráficos de criptomonedas",
-            "Red descentralizada abstracta"
-        ],
-        'tutoriales': [
-            f"Screenshot o diagrama sobre {topic}",
-            "Paso a paso visual",
-            "Interfaz de usuario",
-            "Código en pantalla"
-        ]
+def check_daily_limit():
+    """Verifica que no se hayan creado más de 5 posts hoy."""
+    posts_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), '_posts')
+    today = date.today().strftime('%Y-%m-%d')
+
+    # Contar posts creados hoy
+    today_posts = glob.glob(os.path.join(posts_dir, f"{today}-*.md"))
+    posts_count = len(today_posts)
+
+    if posts_count >= 5:
+        print(f"⚠️  LÍMITE DIARIO ALCANZADO: Ya se crearon {posts_count} posts hoy.")
+        print(f"   El límite diario es de 5 posts para mantener calidad del contenido.")
+        print(f"   Posts creados hoy:")
+        for post in today_posts:
+            print(f"   - {os.path.basename(post)}")
+        return False, posts_count
+
+    return True, posts_count
+
+def get_unsplash_image(topic, category, api_key=None):
+    """Obtiene una imagen relevante de Unsplash basada en el tema."""
+    if not api_key or api_key == "YOUR_UNSPLASH_ACCESS_KEY_HERE":
+        print("⚠️  No hay API key de Unsplash configurada.")
+        print("   Usando imagen placeholder. Para imágenes automáticas:")
+        print("   1. Regístrate en https://unsplash.com/developers")
+        print("   2. Crea una aplicación y obtén tu Access Key")
+        print("   3. Agrega UNSPLASH_ACCESS_KEY=tu_key en scripts/.env")
+        # Retornar placeholder
+        return f"https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop"
+
+    # Palabras clave por categoría
+    search_queries = {
+        'ia': ['artificial intelligence', 'AI', 'machine learning', 'neural network', 'robot'],
+        'blockchain': ['blockchain', 'cryptocurrency', 'bitcoin', 'ethereum', 'crypto'],
+        'tutoriales': ['programming', 'code', 'developer', 'technology', 'computer']
     }
 
-    return suggestions.get(category, ["Imagen relacionada con el tema"])
+    # Construir query de búsqueda
+    category_keywords = search_queries.get(category, ['technology'])
+    # Usar el tema y una palabra clave de la categoría
+    query = f"{category_keywords[0]} technology"
 
-def create_post_file(title, content, excerpt, tags, category, date_str, filename):
+    try:
+        url = "https://api.unsplash.com/search/photos"
+        headers = {"Authorization": f"Client-ID {api_key}"}
+        params = {
+            "query": query,
+            "per_page": 5,
+            "orientation": "landscape"
+        }
+
+        response = requests.get(url, headers=headers, params=params, timeout=10)
+        response.raise_for_status()
+
+        data = response.json()
+
+        if data.get('results') and len(data['results']) > 0:
+            # Tomar la primera imagen
+            photo = data['results'][0]
+            image_url = f"{photo['urls']['regular']}?w=800&h=600&fit=crop"
+            photographer = photo['user']['name']
+            photographer_url = photo['user']['links']['html']
+
+            print(f"✅ Imagen encontrada de Unsplash")
+            print(f"   Fotógrafo: {photographer}")
+            print(f"   URL: {photographer_url}")
+
+            return image_url
+        else:
+            print("⚠️  No se encontraron imágenes en Unsplash, usando placeholder")
+            return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop"
+
+    except Exception as e:
+        print(f"⚠️  Error obteniendo imagen de Unsplash: {e}")
+        print("   Usando imagen placeholder")
+        return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop"
+
+def git_commit_and_push(filename, title):
+    """Realiza commit y push automático del nuevo post a GitHub."""
+    try:
+        # Cambiar al directorio raíz del proyecto
+        project_root = os.path.dirname(os.path.dirname(__file__))
+
+        print("\n📤 Subiendo a GitHub...")
+
+        # Git add
+        result = subprocess.run(
+            ["git", "add", f"_posts/{filename}"],
+            cwd=project_root,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            print(f"⚠️  Error en git add: {result.stderr}")
+            return False
+
+        # Git commit
+        commit_message = f"Add: Nuevo artículo '{title}'\n\n🤖 Generado automáticamente con IA\n\nCo-Authored-By: Claude <noreply@anthropic.com>"
+
+        result = subprocess.run(
+            ["git", "commit", "-m", commit_message],
+            cwd=project_root,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            print(f"⚠️  Error en git commit: {result.stderr}")
+            return False
+
+        # Git push
+        result = subprocess.run(
+            ["git", "push", "origin", "main"],
+            cwd=project_root,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            print(f"⚠️  Error en git push: {result.stderr}")
+            print("   Puedes hacer push manualmente con: git push origin main")
+            return False
+
+        print("✅ Cambios subidos exitosamente a GitHub")
+        return True
+
+    except Exception as e:
+        print(f"⚠️  Error en git operations: {e}")
+        print("   Puedes hacer commit/push manualmente")
+        return False
+
+def create_post_file(title, content, excerpt, tags, category, date_str, filename, image_url=None):
     """Crea el archivo markdown del post con front matter."""
 
-    # Front matter
+    # Front matter con imagen
     front_matter = f"""---
 layout: post
 title: "{title}"
@@ -234,6 +345,7 @@ date: {date_str}
 categories: [{category}]
 tags: [{', '.join(tags)}]
 excerpt: "{excerpt}"
+image: "{image_url}"
 ---
 
 """

@@ -1,0 +1,11 @@
+<!-- Google AdSense Auto Ads Script -->
+{% if site.adsense.enabled and site.adsense.auto_ads and site.google_ad_client %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_ad_client }}"
+     crossorigin="anonymous"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "{{ site.google_ad_client }}",
+    enable_page_level_ads: true
+  });
+</script>
+{% endif %}

@@ -21,16 +21,24 @@ layout: default
 
     <!-- Reading Progress Bar se añade automáticamente vía JavaScript -->
 
-    <!-- AdSense Banner después del título -->
+    <!-- AdSense Header Banner después del título -->
     <div class="container">
-        {% include adsense-banner.html %}
+        {% include adsense-header.html %}
     </div>
 
     <div class="post-content container">
         {{ content }}
+
+        <!-- AdSense In-Article (mitad del contenido) -->
+        {% if content contains '<h2>' or content contains '<h3>' %}
+            {% assign content_words = content | number_of_words %}
+            {% if content_words > 300 %}
+                {% include adsense-in-article.html %}
+            {% endif %}
+        {% endif %}
     </div>
 
-    <!-- AdSense Banner al final del contenido -->
+    <!-- AdSense Footer Banner al final del contenido -->
     <div class="container">
         {% include adsense-banner.html %}
     </div>
@@ -91,9 +99,11 @@ layout: default
             {% endif %}
         </section>
 
-        <!-- Sidebar con Posts Populares -->
+        <!-- Sidebar con Posts Populares y AdSense -->
         <aside class="post-sidebar">
+            {% include adsense-sidebar.html %}
             {% include popular-posts.html %}
+            {% include adsense-sidebar.html %}
         </aside>
     </div>
 </div>

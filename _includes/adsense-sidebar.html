@@ -1,0 +1,36 @@
+<!-- Google AdSense Sidebar Ad - 300x250 -->
+{% if site.adsense.enabled and site.ad_units.sidebar %}
+<div class="adsense-sidebar-ad">
+    <div class="ad-label">Publicidad</div>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ site.google_ad_client }}"
+         data-ad-slot="{{ site.ad_units.sidebar }}"
+         data-ad-format="rectangle"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+{% endif %}
+
+<style>
+.adsense-sidebar-ad {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.adsense-sidebar-ad .ad-label {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.adsense-sidebar-ad ins {
+    max-width: 300px;
+    margin: 0 auto;
+}
+</style>

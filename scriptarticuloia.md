@@ -5,6 +5,11 @@
 El script se conecta a **Groq** (una API gratuita de IA) y usa el modelo **Llama 3.1 70B** (muy potente) para escribir artículos completos automáticamente.
 
 ---
+uso:
+
+python -X utf8 generate-post.py --topic "¿Que es un Rugpull?" --category blockchain 
+
+..............
 
 ## 🚀 Tutorial Paso a Paso
 

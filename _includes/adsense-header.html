@@ -1,0 +1,38 @@
+<!-- Google AdSense Header Ad - Banner 728x90 -->
+{% if site.adsense.enabled and site.ad_units.header %}
+<div class="adsense-header-ad">
+    <div class="ad-label">Publicidad</div>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ site.google_ad_client }}"
+         data-ad-slot="{{ site.ad_units.header }}"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+{% endif %}
+
+<style>
+.adsense-header-ad {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.adsense-header-ad .ad-label {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 728px) {
+    .adsense-header-ad ins {
+        width: 320px !important;
+        height: 50px !important;
+    }
+}
+</style>

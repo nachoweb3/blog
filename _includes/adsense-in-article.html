@@ -1,0 +1,45 @@
+<!-- Google AdSense In-Article Ad - 300x250 -->
+{% if site.adsense.enabled and site.adsense.in_article_ads and site.ad_units.in_article %}
+<div class="adsense-in-article-ad">
+    <div class="ad-label">Publicidad</div>
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-client="{{ site.google_ad_client }}"
+         data-ad-slot="{{ site.ad_units.in_article }}"
+         data-ad-format="fluid"
+         data-ad-layout="in-article"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+{% endif %}
+
+<style>
+.adsense-in-article-ad {
+    margin: 30px 0;
+    text-align: center;
+    clear: both;
+}
+
+.adsense-in-article-ad .ad-label {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.adsense-in-article-ad ins {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 768px) {
+    .adsense-in-article-ad {
+        margin: 20px 0;
+    }
+}
+</style>

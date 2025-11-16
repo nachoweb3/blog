@@ -45,6 +45,24 @@ categories_list:
     slug: "tutoriales"
     description: "Las mejores guías paso a paso"
 
+# Configuración de Google AdSense
+google_ad_client: "ca-pub-3096348441921012"  # ID de AdSense configurado
+google_site_verification: ""  # AGREGA AQUÍ TU CÓDIGO DE VERIFICACIÓN DE ADSENSE
+adsense:
+  enabled: true
+  auto_ads: true
+  sticky_ad: true
+  in_article_ads: true
+  matched_content: true
+
+# Anuncios específicos
+ad_units:
+  header: "3096348441921012"      # Banner superior (728x90)
+  sidebar: "3096348441921012"     # Sidebar (300x250)
+  in_article: "3096348441921012"  # Dentro del artículo (300x250)
+  footer: "3096348441921012"      # Footer (728x90)
+  sticky: "3096348441921012"      # Anuncio pegajoso (320x50)
+
 # Exclusiones
 exclude:
   - Gemfile

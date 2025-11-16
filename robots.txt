@@ -14,5 +14,19 @@ Disallow: /_site/
 Allow: /assets/css/
 Allow: /assets/js/
 
+# Allow Google AdSense bot specifically
+User-agent: Mediapartners-Google
+Allow: /
+
+# Allow Google crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
 # Sitemap location
 Sitemap: https://nachoweb3.github.io/blog/sitemap.xml
