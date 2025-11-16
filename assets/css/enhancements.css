@@ -1,0 +1,410 @@
+/* ===== MEJORAS UX/UI - ANIMACIONES Y EFECTOS ===== */
+
+/* === Smooth Scroll === */
+html {
+    scroll-behavior: smooth;
+}
+
+/* === Reading Progress Bar === */
+.reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+/* === Scroll to Top Button === */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-2px);
+}
+
+/* === Dark Mode Toggle === */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* === Dark Mode Variables === */
+body.dark-mode {
+    --primary-color: #818cf8;
+    --secondary-color: #a78bfa;
+    --accent-color: #34d399;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --border-color: #374151;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .site-header {
+    background: var(--bg-primary);
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .post-card {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .category-card {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .share-button {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+body.dark-mode .share-button:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* === Fade-in Animations === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Aplicar animaciones a elementos */
+.post-card {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.post-card:nth-child(1) { animation-delay: 0.1s; }
+.post-card:nth-child(2) { animation-delay: 0.2s; }
+.post-card:nth-child(3) { animation-delay: 0.3s; }
+.post-card:nth-child(4) { animation-delay: 0.4s; }
+.post-card:nth-child(5) { animation-delay: 0.5s; }
+.post-card:nth-child(6) { animation-delay: 0.6s; }
+.post-card:nth-child(7) { animation-delay: 0.1s; }
+.post-card:nth-child(8) { animation-delay: 0.2s; }
+.post-card:nth-child(9) { animation-delay: 0.3s; }
+.post-card:nth-child(10) { animation-delay: 0.4s; }
+.post-card:nth-child(11) { animation-delay: 0.5s; }
+.post-card:nth-child(12) { animation-delay: 0.6s; }
+
+.hero {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.category-card {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.category-card:nth-child(1) { animation-delay: 0.1s; }
+.category-card:nth-child(2) { animation-delay: 0.2s; }
+.category-card:nth-child(3) { animation-delay: 0.3s; }
+
+.post-header {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.post-content {
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+/* === Social Share Buttons Enhanced === */
+.social-share-container {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.share-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.share-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.share-button.twitter {
+    background: #1DA1F2;
+    color: white;
+}
+
+.share-button.twitter:hover {
+    background: #1a8cd8;
+}
+
+.share-button.facebook {
+    background: #4267B2;
+    color: white;
+}
+
+.share-button.facebook:hover {
+    background: #365899;
+}
+
+.share-button.linkedin {
+    background: #0077b5;
+    color: white;
+}
+
+.share-button.linkedin:hover {
+    background: #006399;
+}
+
+.share-button.whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.share-button.whatsapp:hover {
+    background: #20bd5a;
+}
+
+.share-button.copy-link {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.share-button.copy-link:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--primary-color);
+}
+
+.share-button.copy-link.copied {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Iconos para botones de compartir */
+.share-button::before {
+    font-size: 18px;
+}
+
+/* === Reading Time Badge === */
+.reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.reading-time::before {
+    content: "📖";
+    font-size: 16px;
+}
+
+/* === Toast Notification === */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* === Mejoras en transiciones === */
+.post-card,
+.category-card,
+.share-button,
+.nav-link,
+.category-link,
+.referral-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === Loading Skeleton (opcional) === */
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* === Responsive adjustments === */
+@media (max-width: 768px) {
+    .scroll-to-top,
+    .dark-mode-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .dark-mode-toggle {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .social-share-container {
+        justify-content: center;
+    }
+
+    .share-button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .toast {
+        bottom: 80px;
+        right: 20px;
+        left: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .reading-progress-bar {
+        height: 3px;
+    }
+
+    .scroll-to-top,
+    .dark-mode-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,18 @@
+# robots.txt for NachoWeb3 Blog
+# https://nachoweb3.github.io/blog
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private directories
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /.jekyll-cache/
+Disallow: /_site/
+
+# Allow CSS and JS for better crawling
+Allow: /assets/css/
+Allow: /assets/js/
+
+# Sitemap location
+Sitemap: https://nachoweb3.github.io/blog/sitemap.xml

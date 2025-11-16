@@ -1,0 +1,26 @@
+<!-- Widget de Posts Populares (basado en posts recientes) -->
+<aside class="popular-posts-widget">
+    <h3 class="widget-title">Posts Populares</h3>
+    <div class="popular-posts-list">
+        {% for post in site.posts limit:5 %}
+        <article class="popular-post-item">
+            <a href="{{ post.url | relative_url }}" class="popular-post-link">
+                {% if post.image %}
+                <div class="popular-post-image">
+                    <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+                </div>
+                {% endif %}
+                <div class="popular-post-content">
+                    <span class="category-badge category-{{ post.categories[0] }}">
+                        {{ post.categories[0] | upcase }}
+                    </span>
+                    <h4 class="popular-post-title">{{ post.title }}</h4>
+                    <time class="popular-post-date" datetime="{{ post.date | date_to_xmlschema }}">
+                        {{ post.date | date: "%d de %B, %Y" }}
+                    </time>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+</aside>

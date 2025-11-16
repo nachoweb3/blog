@@ -1,0 +1,56 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  {% for post in site.posts %}
+  <url>
+    <loc>{{ post.url | absolute_url }}</loc>
+    <lastmod>{% if post.modified_date %}{{ post.modified_date | date_to_xmlschema }}{% else %}{{ post.date | date_to_xmlschema }}{% endif %}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    {% if post.image %}
+    <image:image>
+      <image:loc>{{ post.image | absolute_url }}</image:loc>
+      <image:title>{{ post.title | xml_escape }}</image:title>
+    </image:image>
+    {% endif %}
+  </url>
+  {% endfor %}
+
+  <!-- Categories -->
+  {% for category in site.categories_list %}
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}/categorias/{{ category.slug }}/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+
+  <!-- Static Pages -->
+  {% for page in site.pages %}
+    {% unless page.url contains '/assets/' or page.url contains '/.git/' %}
+    {% if page.url != '/404.html' and page.url != '/feed.xml' %}
+  <url>
+    <loc>{{ page.url | absolute_url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+    {% endif %}
+    {% endunless %}
+  {% endfor %}
+
+</urlset>

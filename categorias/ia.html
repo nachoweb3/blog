@@ -4,6 +4,8 @@ title: "Inteligencia Artificial"
 description: "Últimas noticias y avances en el mundo de la IA"
 ---
 
+{% include tag-filter.html category="ia" %}
+
 <div class="posts-grid">
     {% for post in site.posts %}
         {% if post.categories contains 'ia' %}

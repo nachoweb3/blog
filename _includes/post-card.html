@@ -1,4 +1,4 @@
-<article class="post-card">
+<article class="post-card" data-tags="{% if include.post.tags %}{{ include.post.tags | join: ',' }}{% endif %}">
     <a href="{{ include.post.url | relative_url }}" class="post-card-link">
         {% if include.post.image %}
         <div class="post-card-image">

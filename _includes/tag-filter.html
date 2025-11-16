@@ -1,0 +1,172 @@
+<!-- Filtro por tags -->
+<div class="tag-filter-section">
+    <div class="tag-filter-header">
+        <h3>Filtrar por Tags</h3>
+        <button id="clearTagFilter" class="clear-filter-btn" style="display: none;">Limpiar filtros</button>
+    </div>
+    <div class="tag-filter-container">
+        {% assign all_tags = "" | split: "" %}
+        {% for post in site.posts %}
+            {% if include.category %}
+                {% if post.categories contains include.category %}
+                    {% for tag in post.tags %}
+                        {% unless all_tags contains tag %}
+                            {% assign all_tags = all_tags | push: tag %}
+                        {% endunless %}
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                {% for tag in post.tags %}
+                    {% unless all_tags contains tag %}
+                        {% assign all_tags = all_tags | push: tag %}
+                    {% endunless %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% assign sorted_tags = all_tags | sort %}
+        <div class="tag-filter-list">
+            {% for tag in sorted_tags %}
+                <button class="tag-filter-btn" data-tag="{{ tag }}">
+                    #{{ tag }}
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="active-filters" id="activeFilters" style="display: none;">
+        <span class="active-filters-label">Filtros activos:</span>
+        <div class="active-filters-tags" id="activeFiltersTags"></div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    const filterButtons = document.querySelectorAll('.tag-filter-btn');
+    const clearFilterBtn = document.getElementById('clearTagFilter');
+    const activeFiltersContainer = document.getElementById('activeFilters');
+    const activeFiltersTags = document.getElementById('activeFiltersTags');
+    const postCards = document.querySelectorAll('.post-card');
+    let activeTags = new Set();
+
+    // Función para actualizar la visualización de posts
+    function updatePostsVisibility() {
+        if (activeTags.size === 0) {
+            // Mostrar todos los posts
+            postCards.forEach(card => {
+                card.style.display = '';
+            });
+            clearFilterBtn.style.display = 'none';
+            activeFiltersContainer.style.display = 'none';
+            return;
+        }
+
+        // Filtrar posts por tags
+        let visibleCount = 0;
+        postCards.forEach(card => {
+            const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+            const hasMatchingTag = Array.from(activeTags).some(tag =>
+                cardTags.includes(tag)
+            );
+
+            if (hasMatchingTag) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Mostrar mensaje si no hay resultados
+        const postsGrid = document.querySelector('.posts-grid');
+        let noResultsMsg = document.getElementById('noTagResults');
+
+        if (visibleCount === 0) {
+            if (!noResultsMsg) {
+                noResultsMsg = document.createElement('div');
+                noResultsMsg.id = 'noTagResults';
+                noResultsMsg.className = 'no-tag-results';
+                noResultsMsg.innerHTML = '<p>No se encontraron posts con los tags seleccionados</p>';
+                postsGrid.appendChild(noResultsMsg);
+            }
+        } else {
+            if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+
+        clearFilterBtn.style.display = 'block';
+        updateActiveFilters();
+    }
+
+    // Función para actualizar la visualización de filtros activos
+    function updateActiveFilters() {
+        if (activeTags.size === 0) {
+            activeFiltersContainer.style.display = 'none';
+            return;
+        }
+
+        activeFiltersContainer.style.display = 'flex';
+        activeFiltersTags.innerHTML = Array.from(activeTags).map(tag => `
+            <span class="active-filter-tag">
+                #${tag}
+                <button class="remove-filter" data-tag="${tag}">×</button>
+            </span>
+        `).join('');
+
+        // Añadir event listeners a los botones de eliminar
+        document.querySelectorAll('.remove-filter').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tag = this.dataset.tag;
+                activeTags.delete(tag);
+                const filterBtn = document.querySelector(`.tag-filter-btn[data-tag="${tag}"]`);
+                if (filterBtn) {
+                    filterBtn.classList.remove('active');
+                }
+                updatePostsVisibility();
+            });
+        });
+    }
+
+    // Event listeners para los botones de tags
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tag = this.dataset.tag;
+
+            if (activeTags.has(tag)) {
+                activeTags.delete(tag);
+                this.classList.remove('active');
+            } else {
+                activeTags.add(tag);
+                this.classList.add('active');
+            }
+
+            updatePostsVisibility();
+        });
+    });
+
+    // Limpiar todos los filtros
+    if (clearFilterBtn) {
+        clearFilterBtn.addEventListener('click', function() {
+            activeTags.clear();
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            updatePostsVisibility();
+        });
+    }
+
+    // Añadir tags a las tarjetas de posts
+    postCards.forEach(card => {
+        const link = card.querySelector('.post-card-link');
+        if (!link) return;
+
+        // Buscar los tags en el post
+        const postUrl = link.getAttribute('href');
+        // Los tags ya deberían estar en el data attribute
+        if (!card.dataset.tags) {
+            card.dataset.tags = '';
+        }
+    });
+
+})();
+</script>

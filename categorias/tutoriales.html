@@ -4,6 +4,8 @@ title: "Tutoriales"
 description: "Las mejores guías paso a paso"
 ---
 
+{% include tag-filter.html category="tutoriales" %}
+
 <div class="posts-grid">
     {% for post in site.posts %}
         {% if post.categories contains 'tutoriales' %}
