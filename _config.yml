@@ -1,13 +1,15 @@
 # Configuración del Blog - NachoWeb3
 title: "NachoWeb3 Blog"
-description: "Noticias de IA, Blockchain y Tutoriales de Referidos"
+description: "Noticias de IA, Blockchain y las mejores guías"
 author: "NachoWeb3"
 email: contacto@nachoweb3.com
 url: "https://nachoweb3.github.io"
 baseurl: "/blog"
 
 # Redes sociales
-twitter_username: nachoweb3
+twitter_username: nachoweb3__x
+instagram_username: nacho_web3
+tiktok_username: nacho_web3
 github_username: nachoweb3
 
 # Configuración de Jekyll
@@ -39,7 +41,7 @@ categories_list:
     description: "Novedades del mundo blockchain y criptomonedas"
   - name: "Tutoriales"
     slug: "tutoriales"
-    description: "Guías paso a paso para programas de referidos"
+    description: "Las mejores guías paso a paso"
 
 # Exclusiones
 exclude:
