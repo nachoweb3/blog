@@ -47,7 +47,7 @@ categories_list:
 
 # Configuración de Google AdSense
 google_ad_client: "ca-pub-3096348441921012"  # ID de AdSense configurado
-google_site_verification: ""  # AGREGA AQUÍ TU CÓDIGO DE VERIFICACIÓN DE ADSENSE
+google_site_verification: "test_verification_code_for_demo"  # Código de prueba para verificar sistema
 adsense:
   enabled: true
   auto_ads: true
