@@ -145,6 +145,23 @@
                 action: action,
                 time_shown: Date.now() - popup.dataset.showTime
             });
+
+            // Forzar remoción del popup después de la animación
+            setTimeout(() => {
+                if (!popup.classList.contains('show')) {
+                    popup.style.display = 'none';
+                }
+            }, 400);
+        }
+    }
+
+    // Función forzada para cerrar popup (método alternativo)
+    function forceClosePopup() {
+        const popup = document.getElementById('newsletter-popup');
+        if (popup) {
+            popup.remove();
+            document.body.style.overflow = '';
+            console.log('Popup force-closed');
         }
     }
 
@@ -249,14 +266,28 @@
         const submitBtn = popup.querySelector('.newsletter-submit-btn');
 
         // Event listeners mejorados
-        closeBtn.addEventListener('click', () => {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             hidePopup('close_button');
             markPopupShown();
         });
 
+        // Event listeners adicionales para asegurar cierre
+        closeBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            hidePopup('close_button');
+            markPopupShown();
+        });
+
+        closeBtn.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+        });
+
         // Cerrar al hacer click fuera del contenido
         popup.addEventListener('click', (e) => {
-            if (e.target === popup) {
+            if (e.target === popup || e.target.classList.contains('newsletter-popup-overlay')) {
                 hidePopup('click_outside');
                 markPopupShown();
             }
@@ -265,8 +296,17 @@
         // Cerrar con ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && popup.classList.contains('show')) {
+                e.preventDefault();
                 hidePopup('escape_key');
                 markPopupShown();
+            }
+        });
+
+        // Backup: doble click para forzar cierre
+        popup.addEventListener('dblclick', (e) => {
+            if (e.target === popup || e.target.classList.contains('newsletter-popup-overlay')) {
+                console.log('Double-click detected, force closing popup');
+                forceClosePopup();
             }
         });
 
@@ -392,6 +432,24 @@
         const popup = document.getElementById('newsletter-popup');
         if (popup) popup.remove();
         console.log('Newsletter popup reset completed');
+    };
+
+    // Función de emergencia para forzar cierre del popup
+    window.forceCloseNewsletter = function() {
+        console.log('Force closing newsletter popup...');
+        forceClosePopup();
+    };
+
+    // Función para verificar si el popup existe y está visible
+    window.checkNewsletterPopup = function() {
+        const popup = document.getElementById('newsletter-popup');
+        const isVisible = popup && popup.classList.contains('show');
+        console.log('Newsletter popup status:', {
+            exists: !!popup,
+            visible: isVisible,
+            hasContent: popup && popup.querySelector('.newsletter-popup-content')
+        });
+        return { exists: !!popup, visible: isVisible };
     };
 
     // Ejecutar cuando el DOM esté listo

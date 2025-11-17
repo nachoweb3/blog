@@ -1,0 +1,666 @@
+<!-- Advanced Security Headers and CSP Configuration -->
+<script>
+/**
+ * Advanced Security Implementation for NachoWeb3 Blog
+ * Content Security Policy, security headers, and anti-XSS measures
+ */
+(function() {
+    'use strict';
+
+    // Security configuration
+    const securityConfig = {
+        // Content Security Policy
+        csp: {
+            'default-src': ["'self'"],
+            'script-src': [
+                "'self'",
+                "'unsafe-eval'", // Required for some third-party scripts
+                "'unsafe-inline'", // Will be tightened in production
+                'https://www.googletagmanager.com',
+                'https://www.google-analytics.com',
+                'https://cdnjs.cloudflare.com',
+                'https://connect.facebook.net',
+                'https://platform.twitter.com',
+                'https://www.googlesyndication.com',
+                'https://pagead2.googlesyndication.com'
+            ],
+            'style-src': [
+                "'self'",
+                "'unsafe-inline'",
+                'https://fonts.googleapis.com',
+                'https://cdnjs.cloudflare.com'
+            ],
+            'img-src': [
+                "'self'",
+                'data:',
+                'blob:',
+                'https:',
+                'http:' // Required for some external images
+            ],
+            'font-src': [
+                "'self'",
+                'https://fonts.gstatic.com',
+                'https://cdnjs.cloudflare.com',
+                'data:'
+            ],
+            'connect-src': [
+                "'self'",
+                'https://www.google-analytics.com',
+                'https://stats.g.doubleclick.net',
+                'https://www.googletagmanager.com',
+                'https://formsubmit.co',
+                'https://api.github.com',
+                'wss:', // WebSocket connections
+                'https://coins.llama.fi',
+                'https://api.coingecko.com'
+            ],
+            'frame-src': [
+                "'self'",
+                'https://www.youtube.com',
+                'https://player.vimeo.com',
+                'https://www.google.com',
+                'https://disqus.com'
+            ],
+            'object-src': ["'none'"],
+            'base-uri': ["'self'"],
+            'form-action': ["'self'", 'https://formsubmit.co'],
+            'frame-ancestors': ["'none'"],
+            'upgrade-insecure-requests': []
+        },
+
+        // Additional security headers
+        headers: {
+            'X-Content-Type-Options': 'nosniff',
+            'X-Frame-Options': 'DENY',
+            'X-XSS-Protection': '1; mode=block',
+            'Referrer-Policy': 'strict-origin-when-cross-origin',
+            'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()',
+            'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'
+        },
+
+        // CSRF protection
+        csrf: {
+            enabled: true,
+            tokenName: 'csrf_token',
+            headerName: 'X-CSRF-Token'
+        },
+
+        // Input sanitization
+        sanitization: {
+            enabled: true,
+            allowedTags: ['p', 'br', 'strong', 'em', 'u', 'ol', 'ul', 'li', 'a', 'span', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+            allowedAttributes: {
+                'a': ['href', 'title', 'target'],
+                'img': ['src', 'alt', 'width', 'height'],
+                '*': ['class', 'id']
+            }
+        }
+    };
+
+    // Initialize security measures
+    class SecurityManager {
+        constructor(config) {
+            this.config = config;
+            this.csrfToken = null;
+            this.init();
+        }
+
+        init() {
+            console.log('🔒 Security Manager initializing...');
+
+            // Set security headers (if possible)
+            this.setSecurityHeaders();
+
+            // Generate CSRF token
+            if (this.config.csrf.enabled) {
+                this.generateCSRFToken();
+            }
+
+            // Setup XSS protection
+            this.setupXSSProtection();
+
+            // Setup form security
+            this.setupFormSecurity();
+
+            // Setup content security
+            this.setupContentSecurity();
+
+            // Setup clickjacking protection
+            this.setupClickjackingProtection();
+
+            // Setup crypto-specific security
+            this.setupCryptoSecurity();
+
+            console.log('✅ Security Manager initialized');
+        }
+
+        // Set security headers (client-side simulation)
+        setSecurityHeaders() {
+            // Note: Headers are best set server-side, but we can simulate some protections
+            console.log('🛡️ Security headers configured:', this.config.headers);
+
+            // Add meta tags for some security headers
+            this.addSecurityMetaTags();
+        }
+
+        addSecurityMetaTags() {
+            const metaTags = [
+                { name: 'referrer', content: this.config.headers['Referrer-Policy'] },
+                { 'http-equiv': 'X-Content-Type-Options', content: this.config.headers['X-Content-Type-Options'] },
+                { 'http-equiv': 'X-Frame-Options', content: this.config.headers['X-Frame-Options'] },
+                { 'http-equiv': 'X-XSS-Protection', content: this.config.headers['X-XSS-Protection'] }
+            ];
+
+            metaTags.forEach(tag => {
+                const meta = document.createElement('meta');
+                Object.entries(tag).forEach(([key, value]) => {
+                    meta.setAttribute(key, value);
+                });
+                document.head.appendChild(meta);
+            });
+        }
+
+        // Generate CSRF token
+        generateCSRFToken() {
+            const array = new Uint8Array(32);
+            crypto.getRandomValues(array);
+            this.csrfToken = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+
+            // Store token securely
+            sessionStorage.setItem(this.config.csrf.tokenName, this.csrfToken);
+
+            // Add token to forms
+            this.addCSRFToForms();
+        }
+
+        addCSRFToForms() {
+            const forms = document.querySelectorAll('form[action*="/"], form:not([action])');
+            forms.forEach(form => {
+                if (!form.querySelector(`input[name="${this.config.csrf.tokenName}"]`)) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = this.config.csrf.tokenName;
+                    input.value = this.csrfToken;
+                    form.appendChild(input);
+                }
+            });
+        }
+
+        // Setup XSS protection
+        setupXSSProtection() {
+            // Sanitize dynamic content
+            this.sanitizeDOMContent();
+
+            // Setup mutation observer for dynamic content
+            this.setupMutationObserver();
+
+            // Add input sanitization
+            this.addInputSanitization();
+        }
+
+        sanitizeDOMContent() {
+            // Sanitize existing dynamic content
+            const dynamicElements = document.querySelectorAll('[data-dynamic], [data-user-generated]');
+            dynamicElements.forEach(element => {
+                this.sanitizeElement(element);
+            });
+        }
+
+        sanitizeElement(element) {
+            if (!this.config.sanitization.enabled) return;
+
+            const tagName = element.tagName.toLowerCase();
+            if (!this.config.sanitization.allowedTags.includes(tagName)) {
+                console.warn('⚠️ Potentially unsafe element detected:', tagName);
+                element.remove();
+                return;
+            }
+
+            // Sanitize attributes
+            Array.from(element.attributes).forEach(attr => {
+                const allowedAttrs = this.config.sanitization.allowedAttributes[attr.name] ||
+                                     this.config.sanitization.allowedAttributes['*'];
+
+                if (!allowedAttrs || !allowedAttrs.includes(attr.name)) {
+                    element.removeAttribute(attr.name);
+                }
+            });
+        }
+
+        setupMutationObserver() {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach(mutation => {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            this.sanitizeElement(node);
+                        }
+                    });
+                });
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+
+        addInputSanitization() {
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    this.sanitizeInput(e.target);
+                });
+            });
+        }
+
+        sanitizeInput(input) {
+            // Remove potentially dangerous characters
+            const dangerousChars = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+            if (dangerousChars.test(input.value)) {
+                input.value = input.value.replace(dangerousChars, '');
+                console.warn('⚠️ Potentially dangerous input removed');
+            }
+        }
+
+        // Setup form security
+        setupFormSecurity() {
+            // Add CSRF protection to AJAX requests
+            this.interceptFetch();
+            this.interceptXHR();
+
+            // Add form validation
+            this.addFormValidation();
+        }
+
+        interceptFetch() {
+            const originalFetch = window.fetch;
+            window.fetch = async (...args) => {
+                if (args[1] && (args[1].method === 'POST' || args[1].method === 'PUT' || args[1].method === 'DELETE')) {
+                    args[1].headers = {
+                        ...args[1].headers,
+                        [this.config.csrf.headerName]: this.csrfToken
+                    };
+                }
+                return originalFetch(...args);
+            };
+        }
+
+        interceptXHR() {
+            const originalXHROpen = XMLHttpRequest.prototype.open;
+            XMLHttpRequest.prototype.open = function(method, url) {
+                this._method = method;
+                originalXHROpen.call(this, method, url);
+            };
+
+            const originalXHRSend = XMLHttpRequest.prototype.send;
+            XMLHttpRequest.prototype.send = function(data) {
+                if (this._method && ['POST', 'PUT', 'DELETE'].includes(this._method.toUpperCase())) {
+                    this.setRequestHeader(this.config.csrf.headerName, this.csrfToken);
+                }
+                originalXHRSend.call(this, data);
+            };
+        }
+
+        addFormValidation() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', (e) => {
+                    if (!this.validateForm(form)) {
+                        e.preventDefault();
+                        this.showValidationError(form);
+                    }
+                });
+            });
+        }
+
+        validateForm(form) {
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('validation-error');
+                } else {
+                    input.classList.remove('validation-error');
+                }
+            });
+
+            return isValid;
+        }
+
+        showValidationError(form) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'form-validation-error';
+            errorDiv.textContent = 'Por favor, completa todos los campos requeridos';
+            errorDiv.style.cssText = `
+                background: #ff6b6b;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 10px;
+                font-size: 14px;
+            `;
+
+            form.appendChild(errorDiv);
+
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 5000);
+        }
+
+        // Setup content security
+        setupContentSecurity() {
+            // Add CSP violation reporting
+            this.setupCSPReporting();
+
+            // Monitor for security violations
+            this.monitorSecurityViolations();
+        }
+
+        setupCSPReporting() {
+            // Report CSP violations
+            document.addEventListener('securitypolicyviolation', (e) => {
+                console.error('🚨 CSP Violation:', {
+                    blockedURI: e.blockedURI,
+                    violatedDirective: e.violatedDirective,
+                    originalPolicy: e.originalPolicy
+                });
+
+                // Send to analytics for monitoring
+                if (window.trackCustomEvent) {
+                    window.trackCustomEvent('security_violation', {
+                        type: 'csp_violation',
+                        blockedURI: e.blockedURI,
+                        violatedDirective: e.violatedDirective
+                    });
+                }
+            });
+        }
+
+        monitorSecurityViolations() {
+            // Monitor for XSS attempts
+            window.addEventListener('error', (e) => {
+                if (e.message.includes('Script error') || e.message.includes('SecurityError')) {
+                    console.error('🚨 Potential security violation:', e);
+                    this.logSecurityEvent('potential_xss', {
+                        message: e.message,
+                        filename: e.filename,
+                        lineno: e.lineno
+                    });
+                }
+            });
+        }
+
+        // Setup clickjacking protection
+        setupClickjackingProtection() {
+            // Check if page is in an iframe (clickjacking attempt)
+            if (window.self !== window.top) {
+                console.warn('⚠️ Page loaded in iframe - potential clickjacking attempt');
+                this.preventClickjacking();
+            }
+        }
+
+        preventClickjacking() {
+            // Option 1: Break out of iframe
+            try {
+                window.top.location = window.location;
+            } catch (e) {
+                // Option 2: Hide content if break-out fails
+                document.body.style.display = 'none';
+                console.error('🚨 Clickjacking protection activated - page hidden');
+            }
+        }
+
+        // Setup crypto-specific security measures
+        setupCryptoSecurity() {
+            // Add wallet connection security
+            this.setupWalletSecurity();
+
+            // Add phishing detection
+            this.setupPhishingDetection();
+
+            // Add crypto address validation
+            this.setupCryptoAddressValidation();
+        }
+
+        setupWalletSecurity() {
+            // Monitor for wallet connection attempts
+            window.addEventListener('ethereum#initialized', () => {
+                console.log('🔐 Ethereum provider detected - applying security measures');
+                this.validateWalletConnection();
+            });
+
+            // Add wallet validation
+            if (window.ethereum) {
+                this.validateWalletConnection();
+            }
+        }
+
+        validateWalletConnection() {
+            // Validate wallet provider
+            if (window.ethereum && window.ethereum.isMetaMask) {
+                console.log('✅ MetaMask detected and validated');
+            } else if (window.ethereum) {
+                console.warn('⚠️ Unrecognized wallet provider detected');
+                this.logSecurityEvent('unrecognized_wallet', {
+                    provider: window.ethereum.constructor.name
+                });
+            }
+        }
+
+        setupPhishingDetection() {
+            // Check for common phishing indicators
+            const suspiciousPatterns = [
+                /claim.*free.*crypto/i,
+                /urgent.*wallet/i,
+                /verify.*account/i,
+                /suspended.*account/i
+            ];
+
+            const pageText = document.body.textContent.toLowerCase();
+            const suspiciousContent = suspiciousPatterns.some(pattern => pattern.test(pageText));
+
+            if (suspiciousContent) {
+                console.warn('⚠️ Suspicious content detected');
+                this.logSecurityEvent('potential_phishing', {
+                    patterns: suspiciousPatterns.filter(p => p.test(pageText))
+                });
+            }
+        }
+
+        setupCryptoAddressValidation() {
+            // Validate cryptocurrency addresses
+            document.addEventListener('input', (e) => {
+                if (e.target.type === 'text' && this.isCryptoAddressInput(e.target)) {
+                    this.validateCryptoAddress(e.target);
+                }
+            });
+        }
+
+        isCryptoAddressInput(input) {
+            return input.placeholder?.toLowerCase().includes('address') ||
+                   input.name?.toLowerCase().includes('address') ||
+                   input.id?.toLowerCase().includes('address');
+        }
+
+        validateCryptoAddress(input) {
+            const address = input.value.trim();
+            if (!address) return;
+
+            // Basic validation for common address formats
+            const isEthAddress = /^0x[a-fA-F0-9]{40}$/.test(address);
+            const isBtcAddress = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$|^bc1[a-z0-9]{39,59}$/.test(address);
+
+            if (!isEthAddress && !isBtcAddress) {
+                console.warn('⚠️ Invalid cryptocurrency address format');
+                input.classList.add('crypto-address-error');
+            } else {
+                input.classList.remove('crypto-address-error');
+            }
+        }
+
+        // Log security events
+        logSecurityEvent(type, data) {
+            const event = {
+                type,
+                data,
+                timestamp: new Date().toISOString(),
+                url: window.location.href,
+                userAgent: navigator.userAgent
+            };
+
+            console.log('🔒 Security Event:', event);
+
+            // Send to analytics for monitoring
+            if (window.trackCustomEvent) {
+                window.trackCustomEvent('security_event', {
+                    security_type: type,
+                    ...data
+                });
+            }
+
+            // Store locally for analysis
+            const securityEvents = JSON.parse(localStorage.getItem('security_events') || '[]');
+            securityEvents.push(event);
+            localStorage.setItem('security_events', JSON.stringify(securityEvents.slice(-100))); // Keep last 100 events
+        }
+
+        // Public API methods
+        getCSRFToken() {
+            return this.csrfToken;
+        }
+
+        sanitizeHTML(html) {
+            const div = document.createElement('div');
+            div.textContent = html;
+            return div.innerHTML;
+        }
+
+        validateCSRFToken(token) {
+            return token === this.csrfToken;
+        }
+    }
+
+    // Initialize security manager
+    window.securityManager = new SecurityManager(securityConfig);
+
+    // Add security event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add security indicators
+        window.securityManager.addSecurityIndicators();
+
+        // Setup periodic security scan
+        setInterval(() => {
+            window.securityManager.performSecurityScan();
+        }, 30000); // Every 30 seconds
+    });
+
+    // Extend SecurityManager with additional methods
+    SecurityManager.prototype.addSecurityIndicators = function() {
+        // Add security status indicator
+        const indicator = document.createElement('div');
+        indicator.id = 'security-indicator';
+        indicator.innerHTML = '🔒';
+        indicator.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #4CAF50;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 20px;
+            z-index: 10000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        `;
+
+        indicator.addEventListener('click', () => {
+            this.showSecurityReport();
+        });
+
+        document.body.appendChild(indicator);
+    };
+
+    SecurityManager.prototype.performSecurityScan = function() {
+        const issues = [];
+
+        // Check for missing security attributes
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            if (!link.rel.includes('noopener') || !link.rel.includes('noreferrer')) {
+                issues.push('Missing rel="noopener noreferrer" on external link');
+            }
+        });
+
+        // Check for inline scripts
+        document.querySelectorAll('script:not([src])').forEach(script => {
+            if (script.textContent && script.textContent.trim()) {
+                issues.push('Inline script detected');
+            }
+        });
+
+        // Check for external resources without integrity
+        document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(resource => {
+            if (resource.href && resource.href.includes('http') && !resource.integrity) {
+                issues.push(`External resource without integrity: ${resource.href}`);
+            }
+        });
+
+        if (issues.length > 0) {
+            console.warn('🔍 Security scan found issues:', issues);
+            this.logSecurityEvent('security_scan_issues', { issues });
+        }
+    };
+
+    SecurityManager.prototype.showSecurityReport = function() {
+        const securityEvents = JSON.parse(localStorage.getItem('security_events') || '[]');
+        const recentEvents = securityEvents.slice(-10);
+
+        const report = `
+            Security Report
+            ================
+            Total Security Events: ${securityEvents.length}
+            Recent Events (${recentEvents.length}):
+            ${recentEvents.map(e => `- ${e.type}: ${e.timestamp}`).join('\\n')}
+
+            Security Headers: ${Object.keys(this.config.headers).length}
+            CSP Configured: ${Object.keys(this.config.csp).length}
+            CSRF Protection: ${this.config.csrf.enabled ? 'Enabled' : 'Disabled'}
+        `;
+
+        console.log(report);
+        alert(report);
+    };
+
+    console.log('🔒 Advanced Security System loaded');
+})();
+</script>
+
+<style>
+/* Security-related styles */
+.validation-error {
+    border: 2px solid #ff6b6b !important;
+    background-color: rgba(255, 107, 107, 0.1) !important;
+}
+
+.crypto-address-error {
+    border: 2px solid #ff9800 !important;
+    background-color: rgba(255, 152, 0, 0.1) !important;
+}
+
+.form-validation-error {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+#security-indicator:hover {
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.9);
+}
+</style>

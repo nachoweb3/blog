@@ -1,0 +1,22 @@
+<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="logoGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8A2BE2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4B0082;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Outer glow effect -->
+  <circle cx="300" cy="300" r="290" fill="url(#logoGradient)" opacity="0.3"/>
+  <circle cx="300" cy="300" r="270" fill="url(#logoGradient)" opacity="0.5"/>
+  <circle cx="300" cy="300" r="250" fill="url(#logoGradient)" opacity="0.7"/>
+
+  <!-- Main white circle -->
+  <circle cx="300" cy="300" r="230" fill="white" stroke="#4B0082" stroke-width="8"/>
+
+  <!-- Big N -->
+  <text x="300" y="340" font-family="Arial, sans-serif" font-size="140" font-weight="bold" fill="#4B0082" text-anchor="middle">N</text>
+
+  <!-- WEB3 text -->
+  <text x="300" y="420" font-family="Arial, sans-serif" font-size="48" fill="#8A2BE2" text-anchor="middle">WEB3</text>
+</svg>

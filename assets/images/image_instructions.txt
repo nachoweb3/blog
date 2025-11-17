@@ -1,0 +1,27 @@
+SEO Images for NachoWeb3 Blog
+===============================
+
+✅ Created Files:
+- default-og.svg (Open Graph source)
+- logo.svg (Logo source)
+- default-og.jpg (placeholder - needs proper conversion)
+- logo.png (placeholder - needs proper conversion)
+
+🔄 To Convert SVG to Final Formats:
+1. Online: Use svgtopng.com or similar converter
+2. Desktop: Use Inkscape (free)
+3. Command line: Run convert_svg_images.py (requires dependencies)
+
+📐 Specifications:
+- default-og.jpg: 1200x630 pixels, <1MB, JPG format
+- logo.png: 600x600 pixels, <200KB, PNG with transparency
+
+🎨 Theme:
+- Matrix purple gradient (#4B0082 to #8A2BE2)
+- White text overlays
+- Professional design matching blog theme
+
+🌐 For Social Media:
+- Open Graph image appears when links are shared
+- Logo used by search engines and structured data
+- Both images critical for SEO optimization

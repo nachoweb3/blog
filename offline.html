@@ -1,0 +1,222 @@
+---
+layout: default
+title: "Offline - NachoWeb3"
+description: "Estás offline. Algunas funciones pueden no estar disponibles."
+noindex: true
+---
+
+<style>
+    .offline-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .offline-content {
+        max-width: 500px;
+        background: rgba(138, 43, 226, 0.1);
+        backdrop-filter: blur(20px);
+        border: 2px solid rgba(138, 43, 226, 0.3);
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 20px 60px rgba(138, 43, 226, 0.2);
+    }
+
+    .offline-icon {
+        font-size: 80px;
+        margin-bottom: 1rem;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .offline-title {
+        font-size: 2rem;
+        color: #fff;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    }
+
+    .offline-message {
+        color: #ddd;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .offline-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .offline-btn {
+        background: linear-gradient(135deg, #8a2be2, #764ba2);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .offline-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+    }
+
+    .offline-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .offline-link {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        padding: 1rem;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .offline-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .offline-link-icon {
+        font-size: 1.5rem;
+    }
+
+    .offline-link-text {
+        font-size: 0.9rem;
+    }
+
+    .connection-status {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: rgba(255, 0, 0, 0.1);
+        border: 1px solid rgba(255, 0, 0, 0.3);
+        border-radius: 10px;
+        color: #ff6b6b;
+        font-size: 0.9rem;
+    }
+
+    .connection-status.online {
+        background: rgba(0, 255, 0, 0.1);
+        border-color: rgba(0, 255, 0, 0.3);
+        color: #4caf50;
+    }
+</style>
+
+<div class="offline-container">
+    <div class="offline-content">
+        <div class="offline-icon">📡</div>
+        <h1 class="offline-title">Estás Offline</h1>
+        <p class="offline-message">
+            No hay conexión a internet disponible. Sin embargo, puedes seguir navegando por el contenido que está guardado en tu dispositivo.
+        </p>
+
+        <div class="offline-actions">
+            <button onclick="checkConnection()" class="offline-btn">
+                <span>🔄</span>
+                <span>Verificar Conexión</span>
+            </button>
+            <a href="/" class="offline-btn">
+                <span>🏠</span>
+                <span>Ir al Inicio</span>
+            </a>
+        </div>
+
+        <div class="offline-links">
+            <a href="/ia/" class="offline-link">
+                <span class="offline-link-icon">🤖</span>
+                <span class="offline-link-text">IA</span>
+            </a>
+            <a href="/blockchain/" class="offline-link">
+                <span class="offline-link-icon">⛓️</span>
+                <span class="offline-link-text">Blockchain</span>
+            </a>
+            <a href="/tutoriales/" class="offline-link">
+                <span class="offline-link-icon">📚</span>
+                <span class="offline-link-text">Tutoriales</span>
+            </a>
+            <a href="/newsletter/" class="offline-link">
+                <span class="offline-link-icon">📧</span>
+                <span class="offline-link-text">Newsletter</span>
+            </a>
+        </div>
+
+        <div id="connection-status" class="connection-status">
+            <span>🔴 Sin conexión a internet</span>
+        </div>
+
+        <div style="margin-top: 2rem; font-size: 0.8rem; color: #999;">
+            <p>💡 Tip: Instala la app para acceder a contenido offline</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Check connection status
+    function checkConnection() {
+        const statusDiv = document.getElementById('connection-status');
+
+        if (navigator.onLine) {
+            statusDiv.innerHTML = '<span>🟡 Verificando conexión...</span>';
+
+            fetch('/', { method: 'HEAD', cache: 'no-cache' })
+                .then(() => {
+                    statusDiv.innerHTML = '<span>🟢 ¡Conexión restaurada! Redirigiendo...</span>';
+                    statusDiv.classList.add('online');
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 2000);
+                })
+                .catch(() => {
+                    statusDiv.innerHTML = '<span>🔴 Aún sin conexión</span>';
+                });
+        } else {
+            statusDiv.innerHTML = <span>🔴 Sin conexión a internet</span>;
+        }
+    }
+
+    // Listen for connection changes
+    window.addEventListener('online', () => {
+        checkConnection();
+    });
+
+    window.addEventListener('offline', () => {
+        const statusDiv = document.getElementById('connection-status');
+        statusDiv.innerHTML = '<span>🔴 Conexión perdida</span>';
+        statusDiv.classList.remove('online');
+    });
+
+    // Auto-check connection every 10 seconds
+    setInterval(checkConnection, 10000);
+
+    // Initial check
+    checkConnection();
+</script>

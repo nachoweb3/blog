@@ -83,8 +83,10 @@
 {% endif %}
 
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/lazy-loading.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/newsletter-popup.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/enhancements.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/contrast-fixes.css' | relative_url }}">
 <!-- Google AdSense Auto Ads -->
 {% include adsense-auto-ads.html %}
 
@@ -99,12 +101,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+{% if site.google_analytics_id %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_id }}"></script>
+{% endif %}
 
 <!-- Scripts Personalizados -->
+<script src="{{ '/assets/js/lazy-loading-optimized.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/google-analytics-enhanced.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/analytics-manager.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/airdrop-api-integration.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/newsletter-system.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/contrast-fixer.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/theme-system.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/social-sharing.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/table-of-contents.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/reading-progress.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/ai-assistant.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/gamification-system.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/debug-loader.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/force-visibility.js' | relative_url }}"></script>
 
 <!-- Matrix Background Effect -->
 <script src="{{ '/assets/js/matrix-rain.js' | relative_url }}"></script>

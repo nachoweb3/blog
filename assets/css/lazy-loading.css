@@ -1,0 +1,439 @@
+/**
+ * Lazy Loading Styles for NachoWeb3 Blog
+ *
+ * Optimized CSS for progressive image loading,
+ * performance animations, and loading states.
+ */
+
+/* ====== BASE LAZY LOADING STYLES ====== */
+
+/* Lazy loading container */
+.lazy-load-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Base lazy loading image styles */
+img[data-src],
+img[loading="lazy"] {
+    background-color: #f5f5f5;
+    background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                      linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                      linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    animation: backgroundMove 1s linear infinite;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
+    100% { background-position: 20px 20px, 20px 30px, 30px 10px, 10px 10px; }
+}
+
+/* ====== LOADING STATES ====== */
+
+/* Initial loading state */
+img[data-src]:not([src]),
+img.loading {
+    opacity: 0.7;
+    filter: blur(2px) brightness(1.1);
+    transform: scale(1.02);
+}
+
+/* Loading animation */
+img.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Loaded state */
+img.loaded {
+    opacity: 1;
+    filter: blur(0) brightness(1);
+    transform: scale(1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Error state */
+img.error {
+    opacity: 0.5;
+    filter: grayscale(100%) blur(1px);
+    border: 2px dashed #ff6b6b;
+}
+
+/* ====== LOADING INDICATORS ====== */
+
+/* Default loading spinner */
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(138, 43, 226, 0.1);
+    border-radius: 50%;
+    border-top-color: #8a2be2;
+    animation: spin 1s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Loading text */
+.loading-text {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: #666;
+    font-family: 'Inter', sans-serif;
+    z-index: 2;
+}
+
+/* ====== PROGRESSIVE LOADING ====== */
+
+/* Low quality placeholder */
+img[data-low-quality] {
+    filter: blur(10px);
+    transform: scale(1.05);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Progressive loading animation */
+img.progressive-loading {
+    filter: blur(5px);
+    transform: scale(1.02);
+    transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+img.progressive-loaded {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+/* ====== FADE-IN EFFECTS ====== */
+
+/* Fade in animation for loaded images */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+img.lazy-fade-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ====== SPECIFIC IMAGE CONTAINERS ====== */
+
+/* Blog post images */
+.post-content img[data-src] {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+}
+
+/* Thumbnail images */
+.thumbnail img[data-src] {
+    border-radius: 12px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail img[data-src].loaded:hover {
+    transform: scale(1.05);
+}
+
+/* Hero images */
+.hero img[data-src] {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+/* Gallery images */
+.gallery img[data-src] {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery img[data-src]:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ====== PLACEHOLDER IMAGES ====== */
+
+/* SVG placeholder for missing images */
+img[src^="data:image/svg+xml"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+/* ====== PERFORMANCE INDICATORS ====== */
+
+/* Critical image indicators */
+img[data-priority="critical"] {
+    box-shadow: 0 0 0 2px #4CAF50;
+}
+
+img[data-priority="critical"].loading {
+    box-shadow: 0 0 0 2px #FFC107;
+}
+
+img[data-priority="critical"].loaded {
+    box-shadow: 0 0 0 2px #4CAF50;
+}
+
+/* ====== RESPONSIVE OPTIMIZATIONS ====== */
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    img[data-src] {
+        background-size: 10px 10px;
+        animation-duration: 0.5s;
+    }
+
+    .loading-spinner {
+        width: 30px;
+        height: 30px;
+        border-width: 2px;
+    }
+
+    .loading-text {
+        font-size: 11px;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    img[data-src],
+    img.loading,
+    img.loaded,
+    img.progressive-loading,
+    img.progressive-loaded {
+        transition: none;
+        animation: none;
+        transform: none;
+    }
+
+    .loading-spinner {
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    img[data-src] {
+        background-color: #000;
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.1) 10px,
+            rgba(255, 255, 255, 0.1) 20px
+        );
+    }
+}
+
+/* ====== WEB OPTIMIZATIONS ====== */
+
+/* Preload critical images */
+.preload-critical {
+    display: none;
+}
+
+/* Content-visibility for off-screen images */
+img[data-src][loading="lazy"] {
+    content-visibility: auto;
+    contain-intrinsic-size: 400px 300px;
+}
+
+/* ====== DEBUG STYLES ====== */
+
+/* Debug mode indicators */
+.lazy-load-debug img[data-src]:not(.loaded) {
+    border: 2px dashed #ff6b6b;
+}
+
+.lazy-load-debug img.loaded {
+    border: 2px solid #4CAF50;
+}
+
+.lazy-load-debug img.error {
+    border: 2px solid #ff9800;
+}
+
+/* Performance overlay */
+.performance-overlay {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.9);
+    color: #4CAF50;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    z-index: 1000000;
+    max-width: 250px;
+}
+
+.performance-overlay h4 {
+    margin: 0 0 10px 0;
+    color: #fff;
+    font-size: 12px;
+}
+
+.performance-overlay .metric {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.performance-overlay .metric-value {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+/* ====== UTILITIES ====== */
+
+/* Lazy loading utility classes */
+.lazy-hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-visible {
+    opacity: 1;
+}
+
+.lazy-scale {
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.lazy-scale.loaded {
+    transform: scale(1);
+}
+
+/* Remove lazy loading after page load */
+.lazy-complete img[data-src] {
+    content-visibility: visible;
+}
+
+/* ====== MATRIX THEME INTEGRATION ====== */
+
+/* Matrix-themed loading spinner */
+.matrix-spinner {
+    border-color: rgba(138, 43, 226, 0.1);
+    border-top-color: #8a2be2;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+/* Matrix loading background */
+.matrix-loading-bg {
+    background: linear-gradient(135deg,
+        rgba(138, 43, 226, 0.05) 0%,
+        rgba(0, 255, 255, 0.05) 100%);
+    position: relative;
+}
+
+.matrix-loading-bg::before {
+    content: '█▓▒░';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', monospace;
+    color: #8a2be2;
+    font-size: 20px;
+    animation: matrixPulse 1s ease-in-out infinite;
+}
+
+@keyframes matrixPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* ====== CROP CONTAINERS ====== */
+
+/* Aspect ratio containers for lazy loading */
+.aspect-ratio-16-9 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.aspect-ratio-16-9 img[data-src] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.aspect-ratio-1-1 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* 1:1 aspect ratio */
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.aspect-ratio-1-1 img[data-src] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.aspect-ratio-4-3 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%; /* 4:3 aspect ratio */
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.aspect-ratio-4-3 img[data-src] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

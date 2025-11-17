@@ -1,0 +1,453 @@
+/**
+ * Enhanced Breadcrumbs Navigation Styles
+ * SEO-friendly, accessible, and Matrix-themed
+ */
+
+/* ====== BREADCRUMBS CONTAINER ====== */
+.breadcrumbs {
+  padding: 1rem 0;
+  margin: 0 0 1.5rem 0;
+  background: linear-gradient(135deg,
+    rgba(138, 43, 226, 0.05) 0%,
+    rgba(0, 255, 255, 0.03) 100%);
+  border-bottom: 1px solid rgba(138, 43, 226, 0.1);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.breadcrumbs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ====== BREADCRUMBS LIST ====== */
+.breadcrumbs-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ====== BREADCRUMB ITEMS ====== */
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.breadcrumb-item:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+/* ====== BREADCRUMB LINKS ====== */
+.breadcrumb-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #8a2be2;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(138, 43, 226, 0.05);
+  border: 1px solid transparent;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.breadcrumb-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(138, 43, 226, 0.2),
+    transparent);
+  transition: left 0.5s;
+}
+
+.breadcrumb-link:hover {
+  color: #764ba2;
+  background: rgba(138, 43, 226, 0.1);
+  border-color: rgba(138, 43, 226, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.2);
+}
+
+.breadcrumb-link:hover::before {
+  left: 100%;
+}
+
+.breadcrumb-link:focus {
+  outline: 2px solid #8a2be2;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ====== BREADCRUMB SEPARATORS ====== */
+.breadcrumb-separator {
+  color: rgba(138, 43, 226, 0.4);
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  user-select: none;
+  animation: separatorPulse 2s ease-in-out infinite;
+}
+
+@keyframes separatorPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+/* ====== BREADCRUMB ICONS ====== */
+.breadcrumb-icon {
+  font-size: 1.1em;
+  line-height: 1;
+  display: inline-block;
+  animation: iconBounce 2s ease-in-out infinite;
+}
+
+.breadcrumb-icon:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* ====== CURRENT PAGE ITEM ====== */
+.breadcrumb-current {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5568;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(135deg,
+    rgba(138, 43, 226, 0.1) 0%,
+    rgba(0, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(138, 43, 226, 0.2);
+  border-radius: 8px;
+  font-weight: 600;
+  position: relative;
+}
+
+.breadcrumb-current::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg,
+    #8a2be2,
+    #00ffff,
+    #8a2be2);
+  background-size: 300% 300%;
+  border-radius: 10px;
+  z-index: -1;
+  animation: currentGlow 3s ease-in-out infinite;
+  opacity: 0.3;
+}
+
+@keyframes currentGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ====== MOBILE RESPONSIVENESS ====== */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumbs-list {
+    font-size: 0.85rem;
+    gap: 0.25rem;
+  }
+
+  .breadcrumb-link,
+  .breadcrumb-current {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 0.25rem;
+    font-size: 1rem;
+  }
+
+  .breadcrumb-icon {
+    font-size: 1em;
+  }
+
+  /* Hide some text on very small screens */
+  .breadcrumb-text {
+    display: none;
+  }
+
+  .breadcrumb-link .breadcrumb-icon,
+  .breadcrumb-current .breadcrumb-icon {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumbs-list {
+    padding: 0 1rem;
+  }
+
+  .breadcrumb-item:not(:last-child) {
+    margin-right: 0.25rem;
+  }
+
+  .breadcrumb-link {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .breadcrumb-current {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+}
+
+/* ====== ACCESSIBILITY ====== */
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumb-link,
+  .breadcrumb-icon,
+  .breadcrumb-separator,
+  .breadcrumb-current::after {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .breadcrumb-link {
+    background: rgba(138, 43, 226, 0.2);
+    border-color: #8a2be2;
+    color: #000;
+  }
+
+  .breadcrumb-current {
+    background: rgba(138, 43, 226, 0.3);
+    border-color: #8a2be2;
+    color: #000;
+  }
+
+  .breadcrumb-separator {
+    color: #8a2be2;
+  }
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ====== CATEGORY-SPECIFIC STYLES ====== */
+
+/* IA Category - Purple/Green theme */
+.breadcrumbs[data-category="ia"] .breadcrumb-link {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(0, 255, 0, 0.05));
+}
+
+.breadcrumbs[data-category="ia"] .breadcrumb-link:hover {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 255, 0, 0.1));
+}
+
+/* Blockchain Category - Blue/Purple theme */
+.breadcrumbs[data-category="blockchain"] .breadcrumb-link {
+  background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(138, 43, 226, 0.05));
+}
+
+.breadcrumbs[data-category="blockchain"] .breadcrumb-link:hover {
+  background: linear-gradient(135deg, rgba(66, 153, 225, 0.2), rgba(138, 43, 226, 0.1));
+}
+
+/* Tutoriales Category - Orange/Yellow theme */
+.breadcrumbs[data-category="tutoriales"] .breadcrumb-link {
+  background: linear-gradient(135deg, rgba(237, 137, 54, 0.1), rgba(251, 191, 36, 0.05));
+}
+
+.breadcrumbs[data-category="tutoriales"] .breadcrumb-link:hover {
+  background: linear-gradient(135deg, rgba(237, 137, 54, 0.2), rgba(251, 191, 36, 0.1));
+}
+
+/* ====== VARIANTS ====== */
+
+/* Minimal breadcrumbs */
+.breadcrumbs.minimal {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0;
+}
+
+.breadcrumbs.minimal .breadcrumb-link {
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+}
+
+.breadcrumbs.minimal .breadcrumb-current {
+  background: rgba(138, 43, 226, 0.05);
+  border: 1px solid rgba(138, 43, 226, 0.1);
+}
+
+/* Compact breadcrumbs */
+.breadcrumbs.compact .breadcrumbs-list {
+  font-size: 0.8rem;
+}
+
+.breadcrumbs.compact .breadcrumb-icon {
+  font-size: 0.9em;
+}
+
+/* Breadcrumbs with counter */
+.breadcrumbs.with-counter::before {
+  content: attr(data-counter);
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff6b6b;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+}
+
+/* ====== LOADING STATES ====== */
+.breadcrumbs.loading .breadcrumb-link {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.breadcrumbs.loading .breadcrumb-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid #8a2be2;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ====== MATRIX THEME ENHANCEMENT ====== */
+
+/* Matrix rain effect in breadcrumbs background */
+.breadcrumbs.matrix-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.breadcrumbs.matrix-enhanced::before {
+  content: '█▓▒░█▓▒░█▓▒░';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: rgba(0, 255, 0, 0.05);
+  white-space: nowrap;
+  overflow: hidden;
+  animation: matrixScroll 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes matrixScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+.breadcrumbs.matrix-enhanced .breadcrumbs-list {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glowing effect for current page in Matrix theme */
+.breadcrumbs.matrix-enhanced .breadcrumb-current {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+/* ====== PERFORMANCE OPTIMIZATIONS ====== */
+
+/* GPU acceleration for smooth animations */
+.breadcrumb-link,
+.breadcrumb-current {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Optimized transitions */
+.breadcrumb-link {
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Contain layout for better performance */
+.breadcrumbs {
+  contain: layout style paint;
+}
+
+/* ====== PRINT STYLES ====== */
+@media print {
+  .breadcrumbs {
+    background: white;
+    border: 1px solid #ccc;
+    color: black;
+  }
+
+  .breadcrumb-link,
+  .breadcrumb-current {
+    background: transparent;
+    border: none;
+    color: black;
+  }
+
+  .breadcrumb-icon {
+    display: none;
+  }
+
+  .breadcrumb-separator {
+    color: black;
+  }
+}

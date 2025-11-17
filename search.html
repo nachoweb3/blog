@@ -1,0 +1,705 @@
+---
+layout: default
+title: "Buscar en NachoWeb3"
+description: "Busca artículos sobre IA, Blockchain y tutoriales"
+noindex: false
+---
+
+<div class="search-page">
+    <div class="search-hero">
+        <h1>🔍 Buscar Contenido</h1>
+        <p>Encuentra artículos sobre Inteligencia Artificial, Blockchain y Tutoriales</p>
+    </div>
+
+    <div class="search-container">
+        <!-- Advanced Search Form -->
+        <div class="search-form-advanced">
+            <div class="search-main">
+                <div class="search-input-wrapper">
+                    <input
+                        type="text"
+                        id="search-input-advanced"
+                        placeholder="Buscar artículos, tutoriales, guías..."
+                        autocomplete="off"
+                        class="search-input"
+                    >
+                    <button id="search-btn-advanced" class="search-btn">
+                        <span>🔍</span>
+                        Buscar
+                    </button>
+                </div>
+
+                <!-- Voice Search -->
+                <button id="voice-search-btn" class="voice-search-btn" title="Búsqueda por voz">
+                    <span>🎤</span>
+                </button>
+            </div>
+
+            <!-- Advanced Filters -->
+            <div class="search-filters">
+                <div class="filter-group">
+                    <label class="filter-label">Categorías</label>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" name="category" value="ia" class="category-filter">
+                            <span class="filter-checkbox">🤖</span>
+                            <span class="filter-text">Inteligencia Artificial</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" name="category" value="blockchain" class="category-filter">
+                            <span class="filter-checkbox">⛓️</span>
+                            <span class="filter-text">Blockchain</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" name="category" value="tutoriales" class="category-filter">
+                            <span class="filter-checkbox">📚</span>
+                            <span class="filter-text">Tutoriales</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Etiquetas Populares</label>
+                    <div class="tag-cloud" id="popular-tags">
+                        <span class="tag clickable-tag" data-tag="ChatGPT">ChatGPT</span>
+                        <span class="tag clickable-tag" data-tag="Bitcoin">Bitcoin</span>
+                        <span class="tag clickable-tag" data-tag="Ethereum">Ethereum</span>
+                        <span class="tag clickable-tag" data-tag="Machine Learning">Machine Learning</span>
+                        <span class="tag clickable-tag" data-tag="DeFi">DeFi</span>
+                        <span class="tag clickable-tag" data-tag="NFT">NFT</span>
+                        <span class="tag clickable-tag" data-tag="Trading">Trading</span>
+                        <span class="tag clickable-tag" data-tag="Python">Python</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Ordenar por</label>
+                    <select id="sort-select" class="sort-select">
+                        <option value="relevance">Relevancia</option>
+                        <option value="date-desc">Más reciente</option>
+                        <option value="date-asc">Más antiguo</option>
+                        <option value="title-asc">Alfabético A-Z</option>
+                        <option value="title-desc">Alfabético Z-A</option>
+                        <option value="reading-time-asc">Menor tiempo de lectura</option>
+                        <option value="reading-time-desc">Mayor tiempo de lectura</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Rango de fechas</label>
+                    <div class="date-range">
+                        <input type="date" id="date-from" class="date-input" placeholder="Desde">
+                        <span>hasta</span>
+                        <input type="date" id="date-to" class="date-input" placeholder="Hasta">
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button id="clear-filters" class="clear-filters-btn">
+                        <span>🔄</span>
+                        Limpiar filtros
+                    </button>
+                    <button id="save-search" class="save-search-btn">
+                        <span>💾</span>
+                        Guardar búsqueda
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Suggestions Dropdown -->
+        <div id="search-suggestions" class="search-suggestions">
+            <!-- Suggestions will be populated dynamically -->
+        </div>
+
+        <!-- Search Results -->
+        <div class="search-results-section">
+            <!-- Search Stats -->
+            <div id="search-stats" class="search-stats" style="display: none;">
+                <div class="stats-text">
+                    <span id="results-count">0</span> resultados para
+                    <span id="search-query">""</span>
+                    <span id="search-time"></span>
+                </div>
+            </div>
+
+            <!-- Results List -->
+            <div id="search-results" class="search-results">
+                <!-- Results will be populated dynamically -->
+            </div>
+
+            <!-- Loading State -->
+            <div id="search-loading" class="search-loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Buscando...</p>
+            </div>
+
+            <!-- No Results State -->
+            <div id="no-results" class="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No se encontraron resultados</h3>
+                <p>Intenta con diferentes palabras clave o ajusta los filtros</p>
+                <div class="search-tips">
+                    <h4>Sugerencias:</h4>
+                    <ul>
+                        <li>Usa términos más generales</li>
+                        <li>Revisa la ortografía</li>
+                        <li>Prueba diferentes categorías</li>
+                        <li>Usa los filtros avanzados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div id="search-pagination" class="search-pagination" style="display: none;">
+                <!-- Pagination will be populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Recent Searches -->
+        <div class="recent-searches">
+            <h3>📜 Búsquedas Recientes</h3>
+            <div id="recent-searches-list" class="recent-searches-list">
+                <!-- Recent searches will be populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Popular Searches -->
+        <div class="popular-searches">
+            <h3>🔥 Búsquedas Populares</h3>
+            <div id="popular-searches-list" class="popular-searches-list">
+                <!-- Popular searches will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Scripts -->
+<script src="{{ '/assets/js/advanced-search.js' | relative_url }}"></script>
+
+<style>
+/* Advanced Search Page Styles */
+.search-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.search-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(0, 255, 255, 0.05));
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.search-hero h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+.search-hero p {
+    font-size: 1.2rem;
+    color: #ddd;
+    opacity: 0.9;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-form-advanced {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(138, 43, 226, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.search-main {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 1.25rem 1.5rem;
+    border: 2px solid rgba(138, 43, 226, 0.3);
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #8a2be2;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-btn,
+.voice-search-btn {
+    background: linear-gradient(135deg, #8a2be2, #764ba2);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-btn:hover,
+.voice-search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+}
+
+.voice-search-btn {
+    padding: 1rem;
+}
+
+.search-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    padding: 0.75rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.filter-option:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-checkbox {
+    font-size: 1.2rem;
+}
+
+.filter-text {
+    color: #ddd;
+    font-size: 0.9rem;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.tag:hover,
+.tag.active {
+    background: #8a2be2;
+    color: #fff;
+    border-color: #8a2be2;
+}
+
+.sort-select,
+.date-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(138, 43, 226, 0.3);
+    border-radius: 10px;
+    color: #fff;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.sort-select:focus,
+.date-input:focus {
+    outline: none;
+    border-color: #8a2be2;
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date-range span {
+    color: #ddd;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.clear-filters-btn,
+.save-search-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.clear-filters-btn:hover,
+.save-search-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 15px;
+    margin-top: 0.5rem;
+    z-index: 1000;
+    display: none;
+    backdrop-filter: blur(10px);
+}
+
+.suggestion-item {
+    padding: 1rem 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.suggestion-item:hover {
+    background: rgba(138, 43, 226, 0.2);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.search-results-section {
+    margin-top: 2rem;
+}
+
+.search-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.stats-text {
+    color: #ddd;
+    font-size: 1rem;
+}
+
+.search-results {
+    display: grid;
+    gap: 2rem;
+}
+
+.search-result-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(138, 43, 226, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.search-result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(138, 43, 226, 0.2);
+    border-color: #8a2be2;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.result-title {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.result-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.result-title a:hover {
+    color: #8a2be2;
+}
+
+.result-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.result-category {
+    background: #8a2be2;
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.result-excerpt {
+    color: #ddd;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.result-excerpt .highlight {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+}
+
+.result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.result-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: #999;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.search-loading {
+    text-align: center;
+    padding: 3rem;
+    color: #ddd;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #8a2be2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #ddd;
+}
+
+.no-results-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-results h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.search-tips {
+    text-align: left;
+    max-width: 400px;
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.search-tips h4 {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.search-tips ul {
+    color: #ddd;
+    padding-left: 1.5rem;
+}
+
+.search-tips li {
+    margin-bottom: 0.5rem;
+}
+
+.search-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.pagination-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled),
+.pagination-btn.active {
+    background: #8a2be2;
+    border-color: #8a2be2;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.recent-searches,
+.popular-searches {
+    margin-top: 4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.recent-searches h3,
+.popular-searches h3 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recent-searches-list,
+.popular-searches-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.search-term {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+}
+
+.search-term:hover {
+    background: rgba(138, 43, 226, 0.2);
+    color: #fff;
+    border-color: #8a2be2;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .search-hero h1 {
+        font-size: 2rem;
+    }
+
+    .search-filters {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .search-input-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .search-input {
+        padding: 1rem;
+    }
+
+    .filter-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-pagination {
+        flex-wrap: wrap;
+    }
+}
+</style>

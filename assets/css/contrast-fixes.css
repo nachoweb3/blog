@@ -1,0 +1,466 @@
+/* ===== CONTRASTE MEJORADO - NachoWeb3 ===== */
+/* Corrige problemas de legibilidad y contraste */
+
+/* ===== Mejoras de Variables de Color ===== */
+:root {
+    /* Colores con mejor contraste */
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --text-inverse: #000000;
+
+    /* Fondos con mejor diferenciación */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-card-hover: rgba(255, 255, 255, 0.08);
+
+    /* Bordes más visibles */
+    --border-primary: #8a2be2;
+    --border-secondary: rgba(138, 43, 226, 0.3);
+    --border-light: rgba(255, 255, 255, 0.1);
+
+    /* Estados con mejor feedback visual */
+    --success-color: #00ff88;
+    --warning-color: #ffaa00;
+    --error-color: #ff4444;
+    --info-color: #4488ff;
+}
+
+/* ===== Correcciones Generales de Contraste ===== */
+body {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+/* Asegurar que todo el texto sobre fondos oscuros sea blanco */
+.text-white,
+[class*="text-white"],
+.bg-dark *,
+.bg-black *,
+.matrx-dark * {
+    color: var(--text-primary) !important;
+}
+
+/* Tarjetas y Contenedores */
+.post-card,
+.article-card,
+.card,
+.newsletter-form,
+.search-container,
+.comments-section,
+.widget,
+.sidebar-widget {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-secondary) !important;
+    backdrop-filter: blur(10px);
+}
+
+.post-card:hover,
+.article-card:hover,
+.card:hover {
+    background: var(--bg-card-hover) !important;
+    border-color: var(--border-primary) !important;
+}
+
+/* ===== Tipografía con Mejor Legibilidad ===== */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+p, span, div {
+    color: inherit;
+}
+
+/* Textos específicos que deben ser blancos */
+.post-meta,
+.post-excerpt,
+.article-meta,
+.author-info,
+.reading-time,
+.category-tag,
+.post-tag {
+    color: var(--text-secondary) !important;
+}
+
+/* Enlaces con mejor contraste */
+a {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color) !important;
+    text-decoration: underline;
+}
+
+/* ===== Botones con Mejor Contraste ===== */
+.btn,
+button,
+input[type="submit"],
+input[type="button"] {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    color: var(--text-inverse) !important;
+    border: 2px solid var(--primary-color) !important;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+/* Botones secundarios */
+.btn-secondary,
+.btn-outline {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-primary) !important;
+}
+
+.btn-secondary:hover,
+.btn-outline:hover {
+    background: var(--bg-card) !important;
+}
+
+/* ===== Formularios con Mejor Contraste ===== */
+input,
+textarea,
+select {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-secondary) !important;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+}
+
+/* Placeholders */
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* ===== Navegación con Mejor Contraste ===== */
+.nav-link,
+.nav-item a,
+.menu-item {
+    color: var(--text-secondary) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-light) !important;
+}
+
+.nav-link:hover,
+.nav-item a:hover,
+.menu-item:hover {
+    color: var(--text-primary) !important;
+    background: var(--bg-card-hover) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.nav-link.active,
+.nav-item a.active {
+    color: var(--text-primary) !important;
+    background: var(--bg-card-hover) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* ===== Footer con Mejor Legibilidad ===== */
+.footer,
+.site-footer {
+    background: var(--bg-secondary) !important;
+    border-top: 1px solid var(--border-secondary) !important;
+}
+
+.footer a,
+.footer .nav-link {
+    color: var(--text-secondary) !important;
+}
+
+.footer a:hover {
+    color: var(--text-primary) !important;
+}
+
+/* ===== Sidebar y Widgets ===== */
+.sidebar,
+.widget-area {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-secondary) !important;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.widget-title {
+    color: var(--text-primary) !important;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.widget-content {
+    color: var(--text-secondary) !important;
+}
+
+/* ===== Etiquetas y Categorías ===== */
+.tag,
+.category-badge,
+.post-category {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-secondary) !important;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.tag:hover,
+.category-badge:hover,
+.post-category:hover {
+    background: var(--primary-color) !important;
+    color: var(--text-inverse) !important;
+}
+
+/* ===== Tablas con Mejor Legibilidad ===== */
+table {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-secondary) !important;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light) !important;
+}
+
+th {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600;
+}
+
+td {
+    color: var(--text-secondary) !important;
+}
+
+tr:hover {
+    background: var(--bg-card-hover) !important;
+}
+
+/* ===== Código con Mejor Contraste ===== */
+pre,
+code {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-secondary) !important;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Menlo', monospace;
+}
+
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+code {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.9rem;
+}
+
+/* ===== Blockquotes ===== */
+blockquote {
+    background: var(--bg-card) !important;
+    border-left: 4px solid var(--primary-color) !important;
+    color: var(--text-secondary) !important;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+
+/* ===== Badges y Notificaciones ===== */
+.badge,
+.notification,
+.alert {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-secondary) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge.success,
+.notification.success,
+.alert.success {
+    background: rgba(0, 255, 136, 0.1) !important;
+    border-color: var(--success-color) !important;
+    color: var(--success-color) !important;
+}
+
+.badge.warning,
+.notification.warning,
+.alert.warning {
+    background: rgba(255, 170, 0, 0.1) !important;
+    border-color: var(--warning-color) !important;
+    color: var(--warning-color) !important;
+}
+
+.badge.error,
+.notification.error,
+.alert.error {
+    background: rgba(255, 68, 68, 0.1) !important;
+    border-color: var(--error-color) !important;
+    color: var(--error-color) !important;
+}
+
+/* ===== Loading States ===== */
+.loading,
+.spinner,
+.loading-dots {
+    color: var(--text-primary) !important;
+}
+
+.loading-spinner {
+    border: 3px solid var(--border-secondary) !important;
+    border-top: 3px solid var(--primary-color) !important;
+}
+
+/* ===== Iconos con Mejor Visibilidad ===== */
+.icon,
+svg,
+.fa,
+.fas,
+.far,
+.fab {
+    color: inherit !important;
+    fill: currentColor !important;
+}
+
+/* ===== Estados de Accesibilidad ===== */
+/* Focus visible para mejor navegación por teclado */
+*:focus-visible {
+    outline: 2px solid var(--primary-color) !important;
+    outline-offset: 2px;
+}
+
+/* Skip links para screen readers */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary-color) !important;
+    color: var(--text-inverse) !important;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10000;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* ===== Modo Matrix con Mejor Contraste ===== */
+.matrix-mode {
+    --text-primary: #00ff00;
+    --text-secondary: #00cc00;
+    --primary-color: #00ff00;
+    --secondary-color: #00cc00;
+    --success-color: #00ff00;
+    --warning-color: #ffff00;
+    --error-color: #ff0000;
+}
+
+/* ===== Responsive con Contraste Mantenido ===== */
+@media (max-width: 768px) {
+    .post-card,
+    .widget,
+    .sidebar-widget {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-secondary) !important;
+    }
+
+    .nav-link {
+        background: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        border-bottom: 1px solid var(--border-light) !important;
+    }
+}
+
+/* ===== High Contrast Mode (si está activado) ===== */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #ffffff;
+        --text-secondary: #f0f0f0;
+        --border-primary: #ffffff;
+        --border-secondary: #cccccc;
+        --bg-card: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* ===== Reduce Motion (para accesibilidad) ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== Dark Mode Override ===== */
+@media (prefers-color-scheme: dark) {
+    /* Asegurar que siempre usemos el tema oscuro */
+    body {
+        background-color: var(--bg-primary) !important;
+        color: var(--text-primary) !important;
+    }
+}
+
+/* ===== Importante: Anulación de estilos en conflicto ===== */
+/* Estos estilos tienen máxima prioridad para sobreescribir cualquier conflicto */
+
+/* Forzar colores de texto */
+[style*="color: white"],
+[style*="color: #fff"],
+[style*="color: #ffffff"] {
+    color: var(--text-primary) !important;
+}
+
+/* Forzar fondos oscuros */
+[style*="background: white"],
+[style*="background: #fff"],
+[style*="background: #ffffff"] {
+    background: var(--bg-tertiary) !important;
+}
+
+/* Corregir bordes invisibles */
+[style*="border: 1px solid white"],
+[style*="border: 1px solid #fff"] {
+    border-color: var(--border-primary) !important;
+}

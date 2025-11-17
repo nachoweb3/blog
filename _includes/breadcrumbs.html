@@ -1,0 +1,153 @@
+<!-- Enhanced Breadcrumbs Navigation -->
+{% if page.url != '/' and page.breadcrumbs != false %}
+<nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+  <ol class="breadcrumbs-list">
+    <li class="breadcrumb-item">
+      <a href="{{ '/' | relative_url }}" class="breadcrumb-link" rel="home">
+        <span class="breadcrumb-icon" aria-hidden="true">🏠</span>
+        <span class="breadcrumb-text">Inicio</span>
+      </a>
+    </li>
+
+    <!-- Category breadcrumbs -->
+    {% if page.categories %}
+      {% assign category = page.categories | first %}
+      <li class="breadcrumb-separator" aria-hidden="true">›</li>
+      <li class="breadcrumb-item">
+        <a href="{{ category | downcase | prepend: '/' | append: '/' | relative_url }}"
+           class="breadcrumb-link" rel="tag">
+          {% case category %}
+            {% when 'IA' %}
+              <span class="breadcrumb-icon" aria-hidden="true">🤖</span>
+            {% when 'Blockchain' %}
+              <span class="breadcrumb-icon" aria-hidden="true">⛓️</span>
+            {% when 'Tutoriales' %}
+              <span class="breadcrumb-icon" aria-hidden="true">📚</span>
+            {% else %}
+              <span class="breadcrumb-icon" aria-hidden="true">📁</span>
+          {% endcase %}
+          <span class="breadcrumb-text">{{ category }}</span>
+        </a>
+      </li>
+    {% endif %}
+
+    <!-- Subcategory or tag breadcrumbs -->
+    {% if page.tags and page.tags.size > 0 %}
+      {% assign main_tag = page.tags | first %}
+      <li class="breadcrumb-separator" aria-hidden="true">›</li>
+      <li class="breadcrumb-item">
+        <a href="{{ '/tag/' | append: main_tag | downcase | append: '/' | relative_url }}"
+           class="breadcrumb-link" rel="tag">
+          <span class="breadcrumb-icon" aria-hidden="true">🏷️</span>
+          <span class="breadcrumb-text">{{ main_tag | capitalize }}</span>
+        </a>
+      </li>
+    {% endif %}
+
+    <!-- Custom breadcrumbs from page front matter -->
+    {% if page.breadcrumbs %}
+      {% for crumb in page.breadcrumbs %}
+        {% unless forloop.last %}
+          <li class="breadcrumb-separator" aria-hidden="true">›</li>
+          <li class="breadcrumb-item">
+            {% if crumb.url %}
+              <a href="{{ crumb.url | relative_url }}" class="breadcrumb-link"
+                 {% if crumb.rel %}rel="{{ crumb.rel }}"{% endif %}>
+                {% if crumb.icon %}
+                  <span class="breadcrumb-icon" aria-hidden="true">{{ crumb.icon }}</span>
+                {% endif %}
+                <span class="breadcrumb-text">{{ crumb.name }}</span>
+              </a>
+            {% else %}
+              <span class="breadcrumb-current">
+                {% if crumb.icon %}
+                  <span class="breadcrumb-icon" aria-hidden="true">{{ crumb.icon }}</span>
+                {% endif %}
+                <span class="breadcrumb-text">{{ crumb.name }}</span>
+              </span>
+            {% endif %}
+          </li>
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+
+    <!-- Current page -->
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li class="breadcrumb-item current">
+      <span class="breadcrumb-current" aria-current="page">
+        {% if page.breadcrumb_icon %}
+          <span class="breadcrumb-icon" aria-hidden="true">{{ page.breadcrumb_icon }}</span>
+        {% else %}
+          {% case page.layout %}
+            {% when 'post' %}
+              <span class="breadcrumb-icon" aria-hidden="true">📝</span>
+            {% when 'page' %}
+              <span class="breadcrumb-icon" aria-hidden="true">📄</span>
+            {% when 'newsletter' %}
+              <span class="breadcrumb-icon" aria-hidden="true">📧</span>
+            {% else %}
+              <span class="breadcrumb-icon" aria-hidden="true">📍</span>
+          {% endcase %}
+        {% endif %}
+        <span class="breadcrumb-text">{{ page.title | truncate: 50 }}</span>
+      </span>
+    </li>
+  </ol>
+
+  <!-- Schema.org structured data for breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "{{ site.url }}{{ site.baseurl }}/"
+      }{% if page.categories %},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ page.categories | first }}",
+        "item": "{{ site.url }}{{ site.baseurl }}/{{ page.categories | first | downcase }}/"
+      }{% endif %}{% if page.tags and page.tags.size > 0 %},
+      {
+        "@type": "ListItem",
+        "position": {% if page.categories %}3{% else %}2{% endif %},
+        "name": "{{ page.tags | first | capitalize }}",
+        "item": "{{ site.url }}{{ site.baseurl }}/tag/{{ page.tags | first | downcase }}/"
+      }{% endif %},
+      {
+        "@type": "ListItem",
+        "position": {% if page.categories %}{% if page.tags and page.tags.size > 0 %}4{% else %}3{% endif %}{% else %}{% if page.tags and page.tags.size > 0 %}3{% else %}2{% endif %}{% endif %},
+        "name": "{{ page.title }}",
+        "item": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+      }
+    ]
+  }
+  </script>
+</nav>
+
+<!-- Breadcrumb Schema.org Microdata (alternative to JSON-LD) -->
+<nav class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList" style="display: none;">
+  <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <a href="{{ '/' | relative_url }}" itemprop="item">
+      <span itemprop="name">Inicio</span>
+    </a>
+    <meta itemprop="position" content="1" />
+  </span>
+  {% if page.categories %}
+  <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <a href="{{ page.categories | first | downcase | prepend: '/' | append: '/' | relative_url }}" itemprop="item">
+      <span itemprop="name">{{ page.categories | first }}</span>
+    </a>
+    <meta itemprop="position" content="2" />
+  </span>
+  {% endif %}
+  <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <span itemprop="name">{{ page.title }}</span>
+    <meta itemprop="position" content="{% if page.categories %}3{% else %}2{% endif %}" />
+  </span>
+</nav>
+{% endif %}

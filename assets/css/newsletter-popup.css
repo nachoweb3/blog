@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10000;
+    z-index: 999999;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -170,14 +170,24 @@
     border-radius: 50%;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     line-height: 1;
-    z-index: 10;
+    z-index: 1000000;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
-.newsletter-popup-close:hover {
+.newsletter-popup-close:hover,
+.newsletter-popup-close:focus {
     background: var(--matrix-purple);
     color: var(--matrix-text-primary);
     transform: rotate(90deg) scale(1.1);
     box-shadow: 0 0 20px var(--matrix-glow);
+}
+
+.newsletter-popup-close:active {
+    transform: rotate(90deg) scale(1.05);
+    background: var(--matrix-purple-dark);
 }
 
 /* Icono con animación Matrix */

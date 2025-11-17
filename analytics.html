@@ -1,0 +1,736 @@
+---
+layout: default
+title: "Analytics | NachoWeb3"
+description: "Panel de estadísticas del blog"
+noindex: true
+---
+
+<div class="analytics-container">
+    <div class="analytics-header">
+        <h1>📊 Analytics Dashboard</h1>
+        <p class="subtitle">📈 Estadísticas en tiempo real de tu blog</p>
+    </div>
+
+    <!-- Quick Guide Button -->
+    <div class="guide-section">
+        <button class="help-btn" onclick="toggleGuide()">
+            <span>❓</span>
+            <span>Guía Rápida</span>
+        </button>
+
+        <div class="quick-guide" id="quick-guide" style="display: none;">
+            <div class="guide-content">
+                <h4>🎯 Cómo usar Analytics</h4>
+                <div class="guide-steps">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <p><strong>Mira las métricas</strong> - Usuarios activos, páginas vistas</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <p><strong>Analiza contenido</strong> - Ve qué artículos funcionan mejor</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <p><strong>Mejora tu blog</strong> - Usa los datos para optimizar</p>
+                    </div>
+                </div>
+                <button class="close-btn" onclick="toggleGuide()">Entendido ✅</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-icon">👥</div>
+            <div class="metric-data">
+                <h3 id="active-users">--</h3>
+                <p>Usuarios Activos</p>
+                <span class="trend positive">+12%</span>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-icon">👁️</div>
+            <div class="metric-data">
+                <h3 id="page-views">--</h3>
+                <p>Páginas Vistas</p>
+                <span class="trend positive">+8%</span>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-icon">⏱️</div>
+            <div class="metric-data">
+                <h3 id="avg-time">--</h3>
+                <p>Tiempo Promedio</p>
+                <span class="trend positive">+15%</span>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-icon">📈</div>
+            <div class="metric-data">
+                <h3 id="bounce-rate">--</h3>
+                <p>Tasa de Rebote</p>
+                <span class="trend negative">-5%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <div class="chart-container">
+            <h3>📊 Tráfico Semanal</h3>
+            <div class="simple-chart">
+                <canvas id="traffic-chart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3>🔝 Top Artículos</h3>
+            <div class="top-posts">
+                <div class="post-item">
+                    <span class="rank">1</span>
+                    <span class="title">Introducción a Blockchain</span>
+                    <span class="views">542 vistas</span>
+                </div>
+                <div class="post-item">
+                    <span class="rank">2</span>
+                    <span class="title">Machine Learning Básico</span>
+                    <span class="views">423 vistas</span>
+                </div>
+                <div class="post-item">
+                    <span class="rank">3</span>
+                    <span class="title">Guía Trading Crypto</span>
+                    <span class="views">389 vistas</span>
+                </div>
+                <div class="post-item">
+                    <span class="rank">4</span>
+                    <span class="title">NFT para Principiantes</span>
+                    <span class="views">312 vistas</span>
+                </div>
+                <div class="post-item">
+                    <span class="rank">5</span>
+                    <span class="title">DeFi Explicado</span>
+                    <span class="views">267 vistas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Stats -->
+    <div class="stats-section">
+        <div class="stat-group">
+            <h3>🌍 Visitantes por País</h3>
+            <div class="country-stats">
+                <div class="country-item">
+                    <span class="flag">🇪🇸</span>
+                    <span class="country">España</span>
+                    <div class="bar"><div class="fill" style="width: 65%"></div></div>
+                    <span class="percent">65%</span>
+                </div>
+                <div class="country-item">
+                    <span class="flag">🇲🇽</span>
+                    <span class="country">México</span>
+                    <div class="bar"><div class="fill" style="width: 45%"></div></div>
+                    <span class="percent">45%</span>
+                </div>
+                <div class="country-item">
+                    <span class="flag">🇦🇷</span>
+                    <span class="country">Argentina</span>
+                    <div class="bar"><div class="fill" style="width: 30%"></div></div>
+                    <span class="percent">30%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-group">
+            <h3>📱 Dispositivos</h3>
+            <div class="device-stats">
+                <div class="device-item">
+                    <span class="device">💻 Desktop</span>
+                    <div class="bar"><div class="fill" style="width: 55%"></div></div>
+                    <span class="percent">55%</span>
+                </div>
+                <div class="device-item">
+                    <span class="device">📱 Móvil</span>
+                    <div class="bar"><div class="fill" style="width: 35%"></div></div>
+                    <span class="percent">35%</span>
+                </div>
+                <div class="device-item">
+                    <span class="device">📟 Tablet</span>
+                    <div class="bar"><div class="fill" style="width: 10%"></div></div>
+                    <span class="percent">10%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Section -->
+    <div class="export-section">
+        <h3>📤 Exportar Datos</h3>
+        <div class="export-buttons">
+            <button class="export-btn" onclick="exportData('csv')">
+                <span>📁</span>
+                <span>Exportar CSV</span>
+            </button>
+            <button class="export-btn" onclick="exportData('json')">
+                <span>📄</span>
+                <span>Exportar JSON</span>
+            </button>
+            <button class="refresh-btn" onclick="refreshData()">
+                <span>🔄</span>
+                <span>Actualizar</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+.analytics-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+}
+
+.analytics-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.analytics-header h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+.subtitle {
+    color: #ddd;
+    font-size: 1.2rem;
+}
+
+/* Guide Styles */
+.guide-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.help-btn {
+    background: linear-gradient(135deg, #8a2be2, #764ba2);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+.help-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(138, 43, 226, 0.4);
+}
+
+.quick-guide {
+    margin-top: 2rem;
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid #8a2be2;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.guide-content h4 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.guide-steps {
+    margin-bottom: 2rem;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.step-num {
+    width: 30px;
+    height: 30px;
+    background: #8a2be2;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step p {
+    color: #ddd;
+    margin: 0;
+}
+
+.step strong {
+    color: #fff;
+}
+
+.close-btn {
+    background: #00ff88;
+    color: #000;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #00cc6a;
+    transform: translateY(-2px);
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.metric-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(138, 43, 226, 0.2);
+    border-color: #8a2be2;
+}
+
+.metric-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+.metric-data h3 {
+    color: #fff;
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.metric-data p {
+    color: #ddd;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+.trend {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+}
+
+.trend.positive {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.trend.negative {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+}
+
+/* Charts Section */
+.charts-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.chart-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+}
+
+.chart-container h3 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.simple-chart {
+    height: 200px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+/* Top Posts */
+.top-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.post-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.post-item:hover {
+    background: rgba(138, 43, 226, 0.1);
+}
+
+.rank {
+    width: 30px;
+    height: 30px;
+    background: #8a2be2;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.title {
+    color: #ddd;
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.views {
+    color: #8a2be2;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Stats Section */
+.stats-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-group {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+}
+
+.stat-group h3 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.country-stats,
+.device-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.country-item,
+.device-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+.country,
+.device {
+    color: #ddd;
+    flex: 1;
+    font-size: 0.9rem;
+    min-width: 80px;
+}
+
+.bar {
+    flex: 2;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8a2be2, #00ffff);
+    border-radius: 3px;
+    transition: width 1s ease;
+}
+
+.percent {
+    color: #8a2be2;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 40px;
+    text-align: right;
+}
+
+/* Export Section */
+.export-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.export-section h3 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.export-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.export-btn,
+.refresh-btn {
+    background: linear-gradient(135deg, #8a2be2, #764ba2);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.export-btn:hover,
+.refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .analytics-container {
+        padding: 1rem;
+    }
+
+    .analytics-header h1 {
+        font-size: 2rem;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-section,
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+
+    .export-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .quick-guide {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+</style>
+
+<script>
+// Analytics functionality
+function toggleGuide() {
+    const guide = document.getElementById('quick-guide');
+    guide.style.display = guide.style.display === 'none' ? 'block' : 'none';
+}
+
+// Simulate real-time data
+function updateMetrics() {
+    const activeUsers = Math.floor(Math.random() * 50) + 20;
+    const pageViews = Math.floor(Math.random() * 1000) + 500;
+    const avgTime = Math.floor(Math.random() * 300) + 120;
+    const bounceRate = Math.floor(Math.random() * 30) + 25;
+
+    document.getElementById('active-users').textContent = activeUsers;
+    document.getElementById('page-views').textContent = pageViews;
+    document.getElementById('avg-time').textContent = formatTime(avgTime);
+    document.getElementById('bounce-rate').textContent = bounceRate + '%';
+
+    // Add loading animation
+    document.querySelectorAll('.metric-card h3').forEach(el => {
+        el.classList.add('loading');
+        setTimeout(() => el.classList.remove('loading'), 500);
+    });
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function exportData(format) {
+    const data = {
+        activeUsers: document.getElementById('active-users').textContent,
+        pageViews: document.getElementById('page-views').textContent,
+        avgTime: document.getElementById('avg-time').textContent,
+        bounceRate: document.getElementById('bounce-rate').textContent,
+        timestamp: new Date().toISOString()
+    };
+
+    if (format === 'csv') {
+        const csv = `Métrica,Valor\nUsuarios Activos,${data.activeUsers}\nPáginas Vistas,${data.pageViews}\nTiempo Promedio,${data.avgTime}\nTasa Rebote,${data.bounceRate}`;
+        downloadFile(csv, 'analytics.csv', 'text/csv');
+    } else if (format === 'json') {
+        const json = JSON.stringify(data, null, 2);
+        downloadFile(json, 'analytics.json', 'application/json');
+    }
+}
+
+function downloadFile(content, filename, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+function refreshData() {
+    updateMetrics();
+
+    // Show refresh animation
+    document.querySelectorAll('.metric-card').forEach((card, index) => {
+        setTimeout(() => {
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 200);
+        }, index * 100);
+    });
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+    updateMetrics();
+
+    // Auto-update every 30 seconds
+    setInterval(updateMetrics, 30000);
+
+    // Show guide on first visit
+    if (!localStorage.getItem('analytics_guide_shown')) {
+        setTimeout(() => {
+            toggleGuide();
+            localStorage.setItem('analytics_guide_shown', 'true');
+        }, 1000);
+    }
+});
+
+// Simple chart simulation
+function createSimpleChart() {
+    const canvas = document.getElementById('traffic-chart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = canvas.offsetWidth;
+    const height = canvas.height = canvas.offsetHeight;
+
+    // Draw simple line chart
+    ctx.strokeStyle = '#8a2be2';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+
+    for (let i = 0; i < 7; i++) {
+        const x = (width / 6) * i;
+        const y = height - (Math.random() * height * 0.7 + height * 0.2);
+
+        if (i === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    }
+
+    ctx.stroke();
+
+    // Add points
+    ctx.fillStyle = '#8a2be2';
+    for (let i = 0; i < 7; i++) {
+        const x = (width / 6) * i;
+        const y = height - (Math.random() * height * 0.7 + height * 0.2);
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+// Initialize chart
+setTimeout(createSimpleChart, 100);
+</script>

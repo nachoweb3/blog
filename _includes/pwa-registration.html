@@ -1,0 +1,366 @@
+<!-- Progressive Web App Registration -->
+<script>
+// PWA Installation and Service Worker Registration
+(function() {
+    'use strict';
+
+    // Check if PWA is supported
+    const isPwaSupported = 'serviceWorker' in navigator && 'PushManager' in window;
+
+    if (!isPwaSupported) {
+        console.log('⚠️ PWA not supported in this browser');
+        return;
+    }
+
+    // Service Worker Registration
+    async function registerServiceWorker() {
+        try {
+            const registration = await navigator.serviceWorker.register('/blog/sw.js', {
+                scope: '/blog/'
+            });
+
+            console.log('✅ Service Worker registered:', registration.scope);
+
+            // Handle updates
+            registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                console.log('🔄 New Service Worker found');
+
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        // New version available
+                        showUpdatePrompt();
+                    }
+                });
+            });
+
+            // Listen for controlling service worker changes
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                console.log('🔄 Service Worker controller changed');
+                window.location.reload();
+            });
+
+            // Set up periodic background sync if available
+            if ('periodicSync' in registration) {
+                requestPeriodicSync();
+            }
+
+        } catch (error) {
+            console.error('❌ Service Worker registration failed:', error);
+        }
+    }
+
+    // PWA Installation Prompt
+    let deferredPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('💡 PWA install prompt available');
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show custom install button
+        showInstallButton();
+    });
+
+    // Show custom install button
+    function showInstallButton() {
+        // Remove existing button if present
+        const existingBtn = document.getElementById('pwa-install-btn');
+        if (existingBtn) {
+            existingBtn.remove();
+        }
+
+        const installBtn = document.createElement('button');
+        installBtn.id = 'pwa-install-btn';
+        installBtn.innerHTML = `
+            <span class="install-icon">📱</span>
+            <span class="install-text">Instalar App</span>
+        `;
+        installBtn.className = 'pwa-install-btn';
+        installBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #8a2be2, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            z-index: 10000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideInUp 0.5s ease-out;
+        `;
+
+        installBtn.addEventListener('mouseenter', () => {
+            installBtn.style.transform = 'translateY(-2px) scale(1.05)';
+            installBtn.style.boxShadow = '0 6px 20px rgba(138, 43, 226, 0.4)';
+        });
+
+        installBtn.addEventListener('mouseleave', () => {
+            installBtn.style.transform = 'translateY(0) scale(1)';
+            installBtn.style.boxShadow = '0 4px 15px rgba(138, 43, 226, 0.3)';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log('📱 PWA installation outcome:', outcome);
+                deferredPrompt = null;
+                installBtn.remove();
+            }
+        });
+
+        document.body.appendChild(installBtn);
+
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+            if (document.body.contains(installBtn)) {
+                installBtn.style.animation = 'slideOutDown 0.5s ease-out forwards';
+                setTimeout(() => {
+                    if (document.body.contains(installBtn)) {
+                        installBtn.remove();
+                    }
+                }, 500);
+            }
+        }, 10000);
+    }
+
+    // Show update prompt
+    function showUpdatePrompt() {
+        const updatePrompt = document.createElement('div');
+        updatePrompt.innerHTML = `
+            <div class="update-prompt-content">
+                <div class="update-icon">🔄</div>
+                <div class="update-message">
+                    <h3>Actualización disponible</h3>
+                    <p>Nueva versión de NachoWeb3 lista para instalar</p>
+                </div>
+                <div class="update-actions">
+                    <button id="update-btn" class="update-btn-primary">Actualizar</button>
+                    <button id="update-later-btn" class="update-btn-secondary">Más tarde</button>
+                </div>
+            </div>
+        `;
+
+        updatePrompt.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #8a2be2;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            z-index: 10001;
+            max-width: 350px;
+            animation: slideInRight 0.5s ease-out;
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = `
+            .update-prompt-content {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .update-icon {
+                font-size: 40px;
+                text-align: center;
+                animation: rotate 2s linear infinite;
+            }
+
+            .update-message h3 {
+                margin: 0;
+                color: #333;
+                font-size: 18px;
+            }
+
+            .update-message p {
+                margin: 5px 0 0 0;
+                color: #666;
+                font-size: 14px;
+            }
+
+            .update-actions {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+            }
+
+            .update-btn-primary, .update-btn-secondary {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .update-btn-primary {
+                background: #8a2be2;
+                color: white;
+            }
+
+            .update-btn-primary:hover {
+                background: #764ba2;
+            }
+
+            .update-btn-secondary {
+                background: #f0f0f0;
+                color: #333;
+            }
+
+            .update-btn-secondary:hover {
+                background: #e0e0e0;
+            }
+
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+
+            @keyframes slideInUp {
+                from { transform: translateY(100%); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+
+            @keyframes slideOutDown {
+                from { transform: translateY(0); opacity: 1; }
+                to { transform: translateY(100%); opacity: 0; }
+            }
+
+            @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+
+        document.head.appendChild(style);
+        document.body.appendChild(updatePrompt);
+
+        // Handle buttons
+        document.getElementById('update-btn').addEventListener('click', () => {
+            window.location.reload();
+        });
+
+        document.getElementById('update-later-btn').addEventListener('click', () => {
+            updatePrompt.style.animation = 'slideOutRight 0.5s ease-out forwards';
+            setTimeout(() => {
+                updatePrompt.remove();
+            }, 500);
+        });
+    }
+
+    // Request periodic background sync
+    async function requestPeriodicSync() {
+        try {
+            const registration = await navigator.serviceWorker.ready;
+            const status = await navigator.permissions.query({
+                name: 'periodic-background-sync'
+            });
+
+            if (status.state === 'granted') {
+                await registration.periodicSync.register('content-update', {
+                    minInterval: 24 * 60 * 60 * 1000 // 24 hours
+                });
+                console.log('🔄 Periodic sync registered');
+            }
+        } catch (error) {
+            console.log('⚠️ Periodic sync not available:', error);
+        }
+    }
+
+    // Push notification subscription
+    async function subscribeToPushNotifications() {
+        try {
+            const registration = await navigator.serviceWorker.ready;
+            const subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array('YOUR_VAPID_PUBLIC_KEY')
+            });
+
+            console.log('📱 Push subscription created:', subscription);
+
+            // Send subscription to server
+            await fetch('/blog/api/push-subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(subscription)
+            });
+
+        } catch (error) {
+            console.error('❌ Push subscription failed:', error);
+        }
+    }
+
+    // Convert VAPID key
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+
+        return outputArray;
+    }
+
+    // Check if app is installed
+    function isAppInstalled() {
+        return window.matchMedia('(display-mode: standalone)').matches ||
+               window.navigator.standalone ||
+               document.referrer.includes('android-app://');
+    }
+
+    // Initialize PWA features
+    if (isAppInstalled()) {
+        console.log('📱 App is running in installed mode');
+        document.body.classList.add('pwa-installed');
+    }
+
+    // Add PWA-specific CSS classes
+    if ('serviceWorker' in navigator) {
+        document.body.classList.add('pwa-supported');
+    }
+
+    // Show install prompt for returning users
+    const visitCount = parseInt(localStorage.getItem('pwa_visit_count') || '0');
+    localStorage.setItem('pwa_visit_count', visitCount + 1);
+
+    if (visitCount === 2 && !isAppInstalled()) {
+        setTimeout(() => {
+            showInstallButton();
+        }, 3000);
+    }
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+        registerServiceWorker();
+    }
+
+    // Make functions globally available
+    window.pwaHelpers = {
+        subscribeToPushNotifications,
+        isAppInstalled,
+        showInstallButton
+    };
+
+})();
+</script>

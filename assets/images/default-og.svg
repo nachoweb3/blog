@@ -1,0 +1,29 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4B0082" />
+      <stop offset="100%" style="stop-color:#8A2BE2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background with gradient -->
+  <rect width="1200" height="630" fill="url(#purpleGradient)"/>
+
+  <!-- Logo circle -->
+  <circle cx="600" cy="120" r="60" fill="white" stroke="#ddd" stroke-width="3"/>
+  <text x="600" y="145" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#4B0082" text-anchor="middle">N</text>
+
+  <!-- Main title -->
+  <text x="600" y="220" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">NachoWeb3</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="40" fill="white" text-anchor="middle">Noticias de IA, Blockchain y las mejores guías</text>
+
+  <!-- Categories -->
+  <text x="600" y="350" font-family="Arial, sans-serif" font-size="32" fill="#DCDCFF" text-anchor="middle">🤖 Inteligencia Artificial</text>
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="32" fill="#DCDCFF" text-anchor="middle">⛓️ Blockchain</text>
+  <text x="600" y="450" font-family="Arial, sans-serif" font-size="32" fill="#DCDCFF" text-anchor="middle">📚 Tutoriales</text>
+
+  <!-- URL -->
+  <text x="600" y="580" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle">nachoweb3.github.io</text>
+</svg>

@@ -1,0 +1,469 @@
+<!-- Advanced SEO Elements for NachoWeb3 Blog -->
+{% assign page_type = page.layout | default: 'website' %}
+
+<!-- Enhanced Meta Tags -->
+<meta name="robots" content="{% if page.noindex %}noindex{% else %}index, follow{% endif %}">
+<meta name="googlebot" content="{% if page.noindex %}noindex{% else %}index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1{% endif %}">
+
+<!-- Language and Region -->
+<meta http-equiv="content-language" content="{{ site.lang | default: 'es' }}">
+<meta name="geo.region" content="{{ site.geo_region | default: 'ES' }}">
+<meta name="geo.placename" content="{{ site.location | default: 'Spain' }}">
+
+<!-- Author and Publisher Verification -->
+<meta name="author" content="{{ page.author | default: site.author }}">
+<link rel="author" href="{{ site.url }}/about">
+<link rel="publisher" href="{{ site.social_links.google_plus | default: '#' }}">
+
+<!-- Article specific tags -->
+{% if page.layout == 'post' %}
+<meta name="article:author" content="{{ page.author | default: site.author }}">
+<meta name="article:section" content="{{ page.categories | first | default: 'Uncategorized' }}">
+<meta name="article:tag" content="{{ page.tags | join: ', ' | default: '' }}">
+<meta name="article:reading_time" content="{{ page.content | number_of_words | divided_by: 200 | ceil }} minutes">
+<meta name="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{% if page.modified_date %}<meta name="article:modified_time" content="{{ page.modified_date | date_to_xmlschema }}">{% endif %}
+<meta name="article:expiration_time" content="{{ page.expiry_date | default: '2099-12-31' | date_to_xmlschema }}">
+
+<!-- News Article specific -->
+{% if page.categories contains 'news' %}
+<meta name="news_keywords" content="{{ page.tags | join: ', ' | default: '' }}">
+<meta name="standout" content="{{ site.standout_url | default: '' }}">
+{% endif %}
+{% endif %}
+
+<!-- Enhanced Twitter Cards -->
+<meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
+<meta name="twitter:site" content="@{{ site.twitter_username }}">
+<meta name="twitter:creator" content="@{{ page.twitter_username | default: site.twitter_username }}">
+<meta name="twitter:domain" content="{{ site.domain | default: 'nachoweb3.github.io' }}">
+<meta name="twitter:url" content="{{ page.url | absolute_url }}">
+<meta name="twitter:title" content="{{ page.title | default: site.title }}">
+<meta name="twitter:description" content="{{ page.excerpt | default: page.description | default: site.description | strip_html | truncate: 160 }}">
+{% if page.image %}
+<meta name="twitter:image" content="{{ page.image | absolute_url }}">
+<meta name="twitter:image:alt" content="{{ page.image_alt | default: page.title }}">
+{% endif %}
+
+<!-- Enhanced Open Graph -->
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:title" content="{{ page.title | default: site.title }}">
+<meta property="og:description" content="{{ page.excerpt | default: page.description | default: site.description | strip_html | truncate: 160 }}">
+<meta property="og:image" content="{{ page.image | default: '/assets/images/default-og.jpg' | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ page.image_alt | default: page.title | default: site.title }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:locale" content="es_ES">
+
+{% if page.layout == 'post' %}
+<meta property="article:section" content="{{ page.categories | first | default: 'Uncategorized' }}">
+<meta property="article:tag" content="{{ page.tags | join: ',' | default: '' }}">
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{% if page.modified_date %}<meta property="article:modified_time" content="{{ page.modified_date | date_to_xmlschema }}">{% endif %}
+{% endif %}
+
+<!-- Additional Open Graph properties -->
+<meta property="og:locale:alternate" content="en_US">
+{% if page.video %}<meta property="og:video" content="{{ page.video | absolute_url }}">{% endif %}
+{% if page.audio %}<meta property="og:audio" content="{{ page.audio | absolute_url }}">{% endif %}
+
+<!-- Facebook specific -->
+<meta property="fb:app_id" content="{{ site.facebook_app_id | default: '' }}">
+<meta property="fb:admins" content="{{ site.facebook_admins | default: '' }}">
+
+<!-- Pinterest verification -->
+<meta name="p:domain_verify" content="{{ site.pinterest_verify | default: '' }}">
+
+<!-- Yandex verification -->
+<meta name="yandex-verification" content="{{ site.yandex_verify | default: '' }}">
+
+<!-- Bing verification -->
+<meta name="msvalidate.01" content="{{ site.bing_verify | default: '' }}">
+
+<!-- Advanced Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#organization",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ '/assets/images/logo.png' | absolute_url }}",
+        "width": 600,
+        "height": 600
+      },
+      "description": "{{ site.description }}",
+      "sameAs": [
+        "{{ site.social_links.twitter | default: '#' }}",
+        "{{ site.social_links.instagram | default: '#' }}",
+        "{{ site.social_links.github | default: '#' }}",
+        "{{ site.social_links.linkedin | default: '#' }}"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "{{ site.contact_phone | default: '' }}",
+        "contactType": "customer service",
+        "availableLanguage": "Spanish"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}",
+      "name": "{{ site.title }}",
+      "description": "{{ site.description }}",
+      "publisher": {
+        "@id": "{{ site.url }}/#organization"
+      },
+      "inLanguage": "es-ES",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ site.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    {% if page.layout == 'post' %}
+    ,
+    {
+      "@type": "BlogPosting",
+      "@id": "{{ page.url | absolute_url }}#blogposting",
+      "headline": "{{ page.title }}",
+      "image": [
+        "{{ page.image | default: '/assets/images/default-og.jpg' | absolute_url }}"
+      ],
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      {% if page.modified_date %}
+      "dateModified": "{{ page.modified_date | date_to_xmlschema }}",
+      {% else %}
+      "dateModified": "{{ page.date | date_to_xmlschema }}",
+      {% endif %}
+      "author": {
+        "@type": "Person",
+        "@id": "{{ site.url }}/about#person",
+        "name": "{{ page.author | default: site.author }}",
+        "url": "{{ site.url }}/about"
+      },
+      "publisher": {
+        "@id": "{{ site.url }}/#organization"
+      },
+      "description": "{{ page.excerpt | default: page.description | strip_html | truncate: 300 }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url | absolute_url }}"
+      },
+      "keywords": "{{ page.tags | join: ', ' | default: '' }}",
+      "articleSection": "{{ page.categories | first | default: 'Uncategorized' }}",
+      "wordCount": {{ page.content | number_of_words }},
+      "commentCount": {{ page.comments | size | default: 0 }},
+      "inLanguage": "es-ES",
+      "isAccessibleForFree": true,
+      "hasPart": {
+        "@type": "WebPageElement",
+        "isAccessibleForFree": true,
+        "cssSelector": ".post-content"
+      }
+    }
+    {% elsif page.layout == 'page' %}
+    ,
+    {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}#webpage",
+      "url": "{{ page.url | absolute_url }}",
+      "name": "{{ page.title }}",
+      "description": "{{ page.description | strip_html | truncate: 160 }}",
+      "isPartOf": {
+        "@id": "{{ site.url }}/#website"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "{{ page.about | default: site.title }}"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "{{ page.image | default: '/assets/images/default-og.jpg' | absolute_url }}"
+      },
+      "inLanguage": "es-ES"
+    }
+    {% endif %}
+    {% if page.layout == 'post' and page.categories contains 'blockchain' %}
+    ,
+    {
+      "@type": "NewsArticle",
+      "@id": "{{ page.url | absolute_url }}#newsarticle",
+      "headline": "{{ page.title }}",
+      "image": "{{ page.image | default: '/assets/images/default-og.jpg' | absolute_url }}",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.modified_date | default: page.date | date_to_xmlschema }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ page.author | default: site.author }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ '/assets/images/logo.png' | absolute_url }}"
+        }
+      },
+      "description": "{{ page.excerpt | default: page.description | strip_html | truncate: 300 }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url | absolute_url }}"
+      }
+    }
+    {% endif %}
+    {% if page.layout == 'post' and page.categories contains 'ia' %}
+    ,
+    {
+      "@type": "TechArticle",
+      "@id": "{{ page.url | absolute_url }}#techarticle",
+      "headline": "{{ page.title }}",
+      "image": "{{ page.image | default: '/assets/images/default-og.jpg' | absolute_url }}",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ page.author | default: site.author }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title }}"
+      },
+      "description": "{{ page.excerpt | default: page.description | strip_html | truncate: 300 }}",
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "{{ page.ai_tool | default: 'Artificial Intelligence' }}"
+      }
+    }
+    {% endif %}
+  ]
+}
+</script>
+
+<!-- Breadcrumb Structured Data -->
+{% if page.breadcrumbs or page.categories %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}"
+    }
+    {% if page.categories %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ page.categories | first | capitalize }}",
+      "item": "{{ site.url }}/{{ page.categories | first | downcase }}"
+    }
+    {% endif %}
+    {% if page.title %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": {% if page.categories %}3{% else %}2{% endif %},
+      "name": "{{ page.title }}",
+      "item": "{{ page.url | absolute_url }}"
+    }
+    {% endif %}
+  ]
+}
+</script>
+{% endif %}
+
+<!-- FAQ Structured Data for FAQ pages -->
+{% if page.layout == 'faq' or page.faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% if page.faq %}
+      {% for faq in page.faq limit:10 %}
+      {
+        "@type": "Question",
+        "name": "{{ faq.question | escape }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ faq.answer | strip_html | escape }}"
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    {% else %}
+    {
+      "@type": "Question",
+      "name": "¿Qué es NachoWeb3?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NachoWeb3 es un blog especializado en noticias de IA, Blockchain y tutoriales."
+      }
+    }
+    {% endif %}
+  ]
+}
+</script>
+{% endif %}
+
+<!-- Product/Service Structured Data for premium content -->
+{% if page.premium or page.subscription %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "{{ page.url | absolute_url }}#product",
+  "name": "{{ page.product_name | default: 'Newsletter Premium' }}",
+  "description": "{{ page.product_description | default: 'Acceso exclusivo a contenido premium de IA y Blockchain' }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ site.title }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ page.url | absolute_url }}",
+    "priceCurrency": "{{ page.price_currency | default: 'EUR' }}",
+    "price": "{{ page.price | default: '29' }}",
+    "priceValidUntil": "{{ page.price_valid_until | default: '2025-12-31' }}",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ site.title }}"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ page.rating_value | default: '4.8' }}",
+    "reviewCount": "{{ page.review_count | default: '2847' }}"
+  }
+}
+</script>
+{% endif %}
+
+<!-- Video Structured Data -->
+{% if page.video %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{ page.video_title | default: page.title }}",
+  "description": "{{ page.video_description | default: page.description }}",
+  "thumbnailUrl": "{{ page.video_thumbnail | default: page.image | absolute_url }}",
+  "uploadDate": "{{ page.date | date_to_xmlschema }}",
+  "duration": "{{ page.video_duration | default: 'PT5M30S' }}",
+  "contentUrl": "{{ page.video | absolute_url }}",
+  "embedUrl": "{{ page.video_embed | default: page.video | absolute_url }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ '/assets/images/logo.png' | absolute_url }}"
+    }
+  }
+}
+</script>
+{% endif %}
+
+<!-- Event Structured Data for webinars/events -->
+{% if page.event %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "{{ page.event_name | default: page.title }}",
+  "description": "{{ page.event_description | default: page.description }}",
+  "startDate": "{{ page.event_start | date_to_xmlschema }}",
+  "endDate": "{{ page.event_end | date_to_xmlschema }}",
+  "location": {
+    "@type": "VirtualLocation",
+    "url": "{{ page.event_url | default: page.url | absolute_url }}"
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "url": "{{ site.url }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ page.event_ticket_url | default: page.url | absolute_url }}",
+    "price": "{{ page.event_price | default: '0' }}",
+    "priceCurrency": "{{ page.event_currency | default: 'EUR' }}",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+{% endif %}
+
+<!-- Course Structured Data -->
+{% if page.layout == 'course' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "{{ page.course_name | default: page.title }}",
+  "description": "{{ page.course_description | default: page.description }}",
+  "provider": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "url": "{{ site.url }}"
+  },
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "online",
+    "instructor": {
+      "@type": "Person",
+      "name": "{{ page.instructor | default: site.author }}"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ page.course_enroll_url | default: page.url | absolute_url }}",
+    "price": "{{ page.course_price | default: '97' }}",
+    "priceCurrency": "{{ page.course_currency | default: 'EUR' }}",
+    "availability": "https://schema.org/InStock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ page.course_rating | default: '4.9' }}",
+    "reviewCount": "{{ page.course_reviews | default: '156' }}"
+  }
+}
+</script>
+{% endif %}
+
+<!-- Additional Performance and SEO Tags -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="dns-prefetch" href="//connect.facebook.net">
+<link rel="dns-prefetch" href="//platform.twitter.com">
+
+<!-- Preconnect for critical resources -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin>
+
+<!-- Resource Hints for performance -->
+{% if page.next %}
+<link rel="prefetch" href="{{ page.next.url | relative_url }}">
+{% endif %}
+{% if page.previous %}
+<link rel="prefetch" href="{{ page.previous.url | relative_url }}">
+{% endif %}
+
+<!-- Critical CSS inline hint -->
+{% unless page.layout == 'post' %}
+<link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}"></noscript>
+{% endunless %}

@@ -29,6 +29,13 @@ collections:
   categories:
     output: true
 
+# Configuración para JavaScript
+defaults:
+  - scope:
+      path: ""
+    values:
+      google_analytics_id: "G-XXXXXXXXXX"
+
 # Configuración de paginación
 paginate: 10
 paginate_path: "/page:num/"
@@ -48,6 +55,13 @@ categories_list:
 # Configuración de Google AdSense
 google_ad_client: "ca-pub-3096348441921012"  # ID de AdSense configurado
 google_site_verification: "KhUyvl8k1Fzop2e2y1NbrULwh5EfzrAjpP39_j7Yrac"  # Código de verificación real de AdSense
+
+# Configuración de Google Analytics 4
+google_analytics_id: "G-XXXXXXXXXX"  # Reemplazar con tu ID real de GA4
+google_analytics_measurement_id: "G-XXXXXXXXXX"  # Mismo ID para el data layer
+
+# Configuración de Google Search Console
+google_site_verification: "KhUyvl8k1Fzop2e2y1NbrULwh5EfzrAjpP39_j7Yrac"  # También sirve para Search Console
 adsense:
   enabled: true
   auto_ads: true
