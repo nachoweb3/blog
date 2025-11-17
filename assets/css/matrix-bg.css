@@ -29,17 +29,17 @@
 .matrix-active section {
     background: rgba(0, 0, 0, 0.85) !important;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 .matrix-active .card,
 .matrix-active .tool-card,
 .matrix-active .indicator-card,
 .matrix-active .airdrop-card {
-    background: rgba(0, 20, 0, 0.9) !important;
+    background: rgba(0, 0, 0, 0.9) !important;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 0, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    box-shadow: 0 8px 32px rgba(138, 43, 226, 0.2);
 }
 
 /* Estilos de texto mejorados para Matrix */
@@ -47,65 +47,65 @@
 .matrix-active h2,
 .matrix-active h3,
 .matrix-active h4 {
-    color: #00ff00 !important;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
 }
 
 .matrix-active p,
 .matrix-active li,
 .matrix-active span {
-    color: #e0ffe0 !important;
+    color: #ffffff !important;
 }
 
 .matrix-active a {
-    color: #00ff41 !important;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    color: #b794f6 !important;
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
     transition: all 0.3s ease;
 }
 
 .matrix-active a:hover {
-    color: #ffff00 !important;
-    text-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+    color: #e9d8fd !important;
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
 }
 
 /* Navegación con efecto Matrix */
 .matrix-active .site-header {
-    background: rgba(0, 10, 0, 0.95) !important;
-    border-bottom: 2px solid rgba(0, 255, 0, 0.3);
+    background: rgba(0, 0, 0, 0.95) !important;
+    border-bottom: 2px solid rgba(138, 43, 226, 0.4);
     backdrop-filter: blur(10px);
 }
 
 .matrix-active .nav-link {
-    color: #00ff00 !important;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    color: #ffffff !important;
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
 }
 
 .matrix-active .nav-link:hover {
-    color: #ffff00 !important;
-    text-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+    color: #e9d8fd !important;
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
 }
 
 /* Botones con efecto cyberpunk */
 .matrix-active .cta-button,
 .matrix-active .action-btn,
 .matrix-active .subscribe-btn {
-    background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 255, 0, 0.2)) !important;
-    border: 2px solid #00ff00 !important;
-    color: #00ff00 !important;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    background: linear-gradient(45deg, rgba(138, 43, 226, 0.1), rgba(168, 85, 247, 0.2)) !important;
+    border: 2px solid #8a2be2 !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
 }
 
 .matrix-active .cta-button:hover,
 .matrix-active .action-btn:hover,
 .matrix-active .subscribe-btn:hover {
-    background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(255, 255, 0, 0.1)) !important;
-    border-color: #ffff00 !important;
-    color: #ffff00 !important;
-    text-shadow: 0 0 15px rgba(255, 255, 0, 1);
-    box-shadow: 0 6px 30px rgba(255, 255, 0, 0.4);
+    background: linear-gradient(45deg, rgba(168, 85, 247, 0.2), rgba(196, 181, 253, 0.3)) !important;
+    border-color: #a855f7 !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 15px rgba(168, 85, 247, 1);
+    box-shadow: 0 6px 30px rgba(168, 85, 247, 0.4);
     transform: translateY(-2px);
 }
 
@@ -113,54 +113,54 @@
 .matrix-active input,
 .matrix-active textarea,
 .matrix-active select {
-    background: rgba(0, 20, 0, 0.8) !important;
-    border: 1px solid rgba(0, 255, 0, 0.3) !important;
-    color: #00ff00 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid rgba(138, 43, 226, 0.4) !important;
+    color: #ffffff !important;
     backdrop-filter: blur(5px);
 }
 
 .matrix-active input:focus,
 .matrix-active textarea:focus,
 .matrix-active select:focus {
-    border-color: #00ff00 !important;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5) !important;
+    border-color: #8a2be2 !important;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5) !important;
 }
 
 /* Progress bars y meters con efecto Matrix */
 .matrix-active .meter-fill,
 .matrix-active .scale-fill,
 .matrix-active .progress-bar {
-    background: linear-gradient(90deg, #00ff00, #00ff41) !important;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    background: linear-gradient(90deg, #8a2be2, #a855f7) !important;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
 }
 
 /* Stats y métricas con efecto glow */
 .matrix-active .stat-number,
 .matrix-active .metric-value,
 .matrix-active .fear-greed-value {
-    color: #00ff00 !important;
-    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    color: #ffffff !important;
+    text-shadow: 0 0 15px rgba(138, 43, 226, 0.8);
     animation: matrixGlow 2s ease-in-out infinite alternate;
 }
 
 @keyframes matrixGlow {
-    0% { text-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
-    100% { text-shadow: 0 0 20px rgba(0, 255, 0, 1), 0 0 30px rgba(0, 255, 0, 0.6); }
+    0% { text-shadow: 0 0 10px rgba(138, 43, 226, 0.8); }
+    100% { text-shadow: 0 0 20px rgba(138, 43, 226, 1), 0 0 30px rgba(168, 85, 247, 0.6); }
 }
 
 /* Tooltips y alerts con efecto Matrix */
 .matrix-active .alert,
 .matrix-active .tooltip {
-    background: rgba(0, 30, 0, 0.9) !important;
-    border: 1px solid rgba(0, 255, 0, 0.4) !important;
-    color: #00ff00 !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    border: 1px solid rgba(138, 43, 226, 0.4) !important;
+    color: #ffffff !important;
     backdrop-filter: blur(10px);
 }
 
 /* Modals con efecto Matrix */
 .matrix-active .modal-content {
-    background: rgba(0, 10, 0, 0.95) !important;
-    border: 2px solid rgba(0, 255, 0, 0.3) !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    border: 2px solid rgba(138, 43, 226, 0.4) !important;
     backdrop-filter: blur(15px);
 }
 
@@ -170,18 +170,18 @@
 }
 
 .matrix-active ::-webkit-scrollbar-track {
-    background: rgba(0, 20, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .matrix-active ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #00ff00, #00aa00);
+    background: linear-gradient(180deg, #8a2be2, #6b21a8);
     border-radius: 6px;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
 }
 
 .matrix-active ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #00ff41, #00cc00);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    background: linear-gradient(180deg, #a855f7, #7c3aed);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
 }
 
 /* Efectos para elementos interactivos */
@@ -190,8 +190,8 @@
 .matrix-active .indicator-card:hover,
 .matrix-active .airdrop-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 255, 0, 0.2);
-    border-color: rgba(0, 255, 0, 0.5) !important;
+    box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
+    border-color: rgba(168, 85, 247, 0.6) !important;
 }
 
 /* Toggle para controlar el efecto Matrix */
@@ -201,28 +201,28 @@
     right: 20px;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.8);
-    border: 2px solid #00ff00;
+    border: 2px solid #8a2be2;
     border-radius: 25px;
     padding: 8px 16px;
-    color: #00ff00;
+    color: #ffffff;
     cursor: pointer;
     font-size: 14px;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.8);
 }
 
 .matrix-toggle:hover {
-    background: rgba(0, 255, 0, 0.1);
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    background: rgba(138, 43, 226, 0.1);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
     transform: scale(1.05);
 }
 
 .matrix-toggle.active {
-    background: rgba(0, 255, 0, 0.2);
-    color: #ffff00;
-    border-color: #ffff00;
-    text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+    background: rgba(138, 43, 226, 0.2);
+    color: #e9d8fd;
+    border-color: #a855f7;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
 }
 
 /* Loading animations con estilo Matrix */
@@ -238,7 +238,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.4), transparent);
     animation: matrixShimmer 2s infinite;
 }
 
@@ -250,8 +250,8 @@
 /* Efectos especiales para herramientas */
 .matrix-active .tool-icon,
 .matrix-active .feature-icon {
-    color: #00ff00 !important;
-    text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    color: #ffffff !important;
+    text-shadow: 0 0 15px rgba(138, 43, 226, 0.8);
     animation: matrixPulse 2s ease-in-out infinite;
 }
 
@@ -263,7 +263,7 @@
 /* Efectos de escritura para texto importante */
 .matrix-typing {
     overflow: hidden;
-    border-right: 2px solid #00ff00;
+    border-right: 2px solid #8a2be2;
     white-space: nowrap;
     animation: matrixTyping 3s steps(40, end), matrixBlink 0.75s step-end infinite;
 }
@@ -275,7 +275,7 @@
 
 @keyframes matrixBlink {
     from, to { border-color: transparent; }
-    50% { border-color: #00ff00; }
+    50% { border-color: #8a2be2; }
 }
 
 /* Responsive adjustments */
@@ -313,9 +313,9 @@
 .matrix-active .post-card,
 .matrix-active .article-card,
 .matrix-active .blog-post {
-    background: rgba(0, 15, 0, 0.85) !important;
+    background: rgba(0, 0, 0, 0.85) !important;
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(0, 255, 0, 0.3);
+    border: 1px solid rgba(138, 43, 226, 0.4);
     border-radius: 15px;
     padding: 2rem;
     margin: 2rem 0;
@@ -374,25 +374,25 @@
     0%, 100% {
         transform: translateY(0px) rotateX(0deg) rotateY(0deg);
         box-shadow:
-            0 20px 40px rgba(0, 255, 0, 0.3),
+            0 20px 40px rgba(138, 43, 226, 0.3),
             0 0 60px rgba(255, 255, 255, 0.1);
     }
     25% {
         transform: translateY(-8px) rotateX(2deg) rotateY(1deg);
         box-shadow:
-            0 25px 50px rgba(0, 255, 0, 0.4),
+            0 25px 50px rgba(138, 43, 226, 0.4),
             0 0 80px rgba(255, 255, 255, 0.15);
     }
     50% {
         transform: translateY(-12px) rotateX(-1deg) rotateY(2deg);
         box-shadow:
-            0 30px 60px rgba(0, 255, 0, 0.5),
+            0 30px 60px rgba(138, 43, 226, 0.5),
             0 0 100px rgba(255, 255, 255, 0.2);
     }
     75% {
         transform: translateY(-6px) rotateX(1deg) rotateY(-1deg);
         box-shadow:
-            0 22px 45px rgba(0, 255, 0, 0.35),
+            0 22px 45px rgba(138, 43, 226, 0.35),
             0 0 70px rgba(255, 255, 255, 0.12);
     }
 }
@@ -419,10 +419,10 @@
 .matrix-active .blog-post:hover {
     transform: translateY(-15px) scale(1.02) rotateX(0deg) rotateY(0deg);
     box-shadow:
-        0 40px 80px rgba(0, 255, 0, 0.6),
+        0 40px 80px rgba(138, 43, 226, 0.6),
         0 0 120px rgba(255, 255, 255, 0.3),
         0 0 200px rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 0, 0.5) !important;
+    border-color: rgba(168, 85, 247, 0.8) !important;
     z-index: 10;
 }
 
@@ -462,9 +462,9 @@
 .matrix-active .blog-post h1,
 .matrix-active .blog-post h2,
 .matrix-active .blog-post h3 {
-    color: #00ff00 !important;
+    color: #ffffff !important;
     text-shadow:
-        0 0 10px rgba(0, 255, 0, 0.8),
+        0 0 10px rgba(138, 43, 226, 0.8),
         0 0 20px rgba(255, 255, 255, 0.3);
     margin-bottom: 1rem;
 }
@@ -472,7 +472,7 @@
 .matrix-active .post-card p,
 .matrix-active .article-card p,
 .matrix-active .blog-post p {
-    color: #e0ffe0 !important;
+    color: #ffffff !important;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
     line-height: 1.6;
 }
@@ -480,9 +480,9 @@
 .matrix-active .post-card a,
 .matrix-active .article-card a,
 .matrix-active .blog-post a {
-    color: #00ff41 !important;
+    color: #b794f6 !important;
     text-shadow:
-        0 0 8px rgba(0, 255, 0, 0.8),
+        0 0 8px rgba(138, 43, 226, 0.8),
         0 0 16px rgba(255, 255, 255, 0.4);
     position: relative;
     transition: all 0.3s ease;
@@ -491,9 +491,9 @@
 .matrix-active .post-card a:hover,
 .matrix-active .article-card a:hover,
 .matrix-active .blog-post a:hover {
-    color: #ffff00 !important;
+    color: #e9d8fd !important;
     text-shadow:
-        0 0 15px rgba(255, 255, 0, 1),
+        0 0 15px rgba(168, 85, 247, 1),
         0 0 30px rgba(255, 255, 255, 0.6);
     transform: translateY(-2px);
 }
@@ -502,8 +502,8 @@
 .matrix-active .post-meta,
 .matrix-active .article-meta,
 .matrix-active .blog-meta {
-    background: rgba(0, 20, 0, 0.6) !important;
-    border: 1px solid rgba(0, 255, 0, 0.2);
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgba(138, 43, 226, 0.3);
     border-radius: 10px;
     padding: 1rem;
     margin: 1rem 0;
@@ -513,10 +513,10 @@
 /* Tags y categorías */
 .matrix-active .tag,
 .matrix-active .category-tag {
-    background: rgba(0, 255, 0, 0.1) !important;
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    color: #00ff00 !important;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+    background: rgba(138, 43, 226, 0.1) !important;
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    color: #ffffff !important;
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.8);
     border-radius: 15px;
     padding: 0.3rem 0.8rem;
     font-size: 0.85rem;
@@ -525,10 +525,10 @@
 
 .matrix-active .tag:hover,
 .matrix-active .category-tag:hover {
-    background: rgba(255, 255, 0, 0.1) !important;
-    border-color: rgba(255, 255, 0, 0.5);
-    color: #ffff00 !important;
-    text-shadow: 0 0 10px rgba(255, 255, 0, 1);
+    background: rgba(168, 85, 247, 0.2) !important;
+    border-color: rgba(168, 85, 247, 0.6);
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 1);
     transform: translateY(-1px);
 }
 
@@ -540,12 +540,12 @@
     height: 2px;
     background: linear-gradient(90deg,
         transparent,
-        rgba(0, 255, 0, 0.5),
+        rgba(138, 43, 226, 0.5),
         rgba(255, 255, 255, 0.3),
-        rgba(0, 255, 0, 0.5),
+        rgba(138, 43, 226, 0.5),
         transparent);
     margin: 2rem 0;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
 }
 
 /* Código y bloques de cita */
@@ -555,8 +555,8 @@
 .matrix-active .post-card blockquote,
 .matrix-active .article-card blockquote,
 .matrix-active .blog-post blockquote {
-    background: rgba(0, 30, 0, 0.8) !important;
-    border: 1px solid rgba(0, 255, 0, 0.4);
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid rgba(138, 43, 226, 0.4);
     border-radius: 10px;
     padding: 1.5rem;
     margin: 1.5rem 0;
@@ -572,7 +572,7 @@
     position: absolute;
     top: 5px;
     right: 10px;
-    color: rgba(0, 255, 0, 0.5);
+    color: rgba(138, 43, 226, 0.5);
     font-size: 0.7rem;
     font-weight: bold;
     letter-spacing: 2px;
@@ -594,7 +594,7 @@
 .matrix-active .blog-post ul li {
     position: relative;
     padding: 0.5rem 0 0.5rem 2rem;
-    color: #e0ffe0 !important;
+    color: #ffffff !important;
 }
 
 .matrix-active .post-card ul li::before,
@@ -603,9 +603,9 @@
     content: '▸';
     position: absolute;
     left: 0;
-    color: #00ff00 !important;
+    color: #ffffff !important;
     font-size: 1.2rem;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.8);
     animation: listPulse 2s ease-in-out infinite;
 }
 

@@ -551,6 +551,72 @@ body {
     transform: translateY(-2px);
 }
 
+.donation-section {
+    margin-top: var(--spacing-sm);
+}
+
+.donation-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.donation-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.donation-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+    background: linear-gradient(135deg, #ff8c42, #ffa500);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.donation-btn:hover::before {
+    left: 100%;
+}
+
+.donation-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba(255, 107, 53, 0.3);
+}
+
+.donation-btn svg {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+/* Animation for Matrix mode */
+.matrix-active .donation-btn {
+    background: linear-gradient(135deg, #8a2be2, #a855f7);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    border-color: rgba(168, 85, 247, 0.3);
+}
+
+.matrix-active .donation-btn:hover {
+    background: linear-gradient(135deg, #a855f7, #c084fc);
+    box-shadow: 0 6px 25px rgba(168, 85, 247, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: var(--spacing-md);

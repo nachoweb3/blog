@@ -10,7 +10,7 @@ class MatrixRain {
         this.rows = 0;
         this.speed = options.speed || 50;
         this.density = options.density || 0.05;
-        this.color = options.color || '#00ff00';
+        this.color = options.color || '#8a2be2';
         this.bgColor = options.bgColor || '#000000';
         this.isActive = false;
         this.animationId = null;
@@ -437,8 +437,23 @@ class MatrixBackground {
 document.addEventListener('DOMContentLoaded', () => {
     window.matrixBackground = new MatrixBackground();
 
+    // Activar automáticamente el efecto Matrix
+    setTimeout(() => {
+        if (window.matrixBackground && !window.matrixBackground.isEnabled) {
+            window.matrixBackground.enable();
+            // Asegurar que el body tenga la clase matrix-active
+            document.body.classList.add('matrix-active');
+
+            // Ocultar el botón toggle ya que es automático
+            const toggle = document.querySelector('.matrix-toggle');
+            if (toggle) {
+                toggle.style.display = 'none';
+            }
+        }
+    }, 500);
+
     // Exponer para debugging
-    console.log('Matrix Background initialized. Press Ctrl+Shift+M to toggle.');
+    console.log('Matrix Background initialized and auto-enabled.');
 });
 
 // Exportar para uso programático
