@@ -12,10 +12,10 @@ html {
     left: 0;
     width: 0%;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    background: linear-gradient(90deg, #8a2be2, #a855f7, #e9d8fd);
     z-index: 1000;
     transition: width 0.1s ease-out;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.6);
 }
 
 /* === Scroll to Top Button === */
@@ -25,21 +25,22 @@ html {
     right: 30px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, #8a2be2, #a855f7);
     color: white;
-    border: none;
+    border: 2px solid rgba(168, 85, 247, 0.4);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s ease;
     z-index: 999;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .scroll-to-top.visible {
@@ -50,7 +51,8 @@ html {
 
 .scroll-to-top:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+    background: linear-gradient(135deg, #a855f7, #c084fc);
 }
 
 .scroll-to-top:active {
@@ -64,39 +66,42 @@ html {
     left: 30px;
     width: 50px;
     height: 50px;
-    background: var(--bg-primary);
-    border: 2px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(138, 43, 226, 0.4);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
     transition: all 0.3s ease;
     z-index: 999;
+    text-shadow: 0 0 8px rgba(138, 43, 226, 0.8);
 }
 
 .dark-mode-toggle:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 16px rgba(168, 85, 247, 0.5);
+    border-color: rgba(168, 85, 247, 0.6);
 }
 
 /* === Dark Mode Variables === */
 body.dark-mode {
-    --primary-color: #818cf8;
-    --secondary-color: #a78bfa;
-    --accent-color: #34d399;
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --bg-primary: #111827;
-    --bg-secondary: #1f2937;
-    --bg-tertiary: #374151;
-    --border-color: #374151;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+    --primary-color: #8a2be2;
+    --secondary-color: #a855f7;
+    --accent-color: #e9d8fd;
+    --text-primary: #ffffff;
+    --text-secondary: #e9d8fd;
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #1a1a1a;
+    --border-color: #8a2be2;
+    --shadow-sm: 0 1px 2px 0 rgba(138, 43, 226, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(138, 43, 226, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(138, 43, 226, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(138, 43, 226, 0.6);
 }
 
 body.dark-mode .site-header {
@@ -120,13 +125,15 @@ body.dark-mode .dark-mode-toggle {
 }
 
 body.dark-mode .share-button {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
+    background: rgba(138, 43, 226, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(138, 43, 226, 0.4);
 }
 
 body.dark-mode .share-button:hover {
-    background: var(--primary-color);
-    color: white;
+    background: #8a2be2;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 /* === Fade-in Animations === */
@@ -276,20 +283,21 @@ body.dark-mode .share-button:hover {
 }
 
 .share-button.copy-link {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
+    background: rgba(138, 43, 226, 0.2);
+    color: #ffffff;
+    border: 2px solid rgba(138, 43, 226, 0.4);
 }
 
 .share-button.copy-link:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--primary-color);
+    background: rgba(168, 85, 247, 0.3);
+    border-color: #a855f7;
 }
 
 .share-button.copy-link.copied {
-    background: var(--accent-color);
-    color: white;
-    border-color: var(--accent-color);
+    background: #e9d8fd;
+    color: #000000;
+    border-color: #e9d8fd;
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.8);
 }
 
 /* Iconos para botones de compartir */
@@ -315,17 +323,20 @@ body.dark-mode .share-button:hover {
     position: fixed;
     bottom: 100px;
     right: 30px;
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
     padding: 16px 24px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
     font-weight: 600;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s ease;
     z-index: 1001;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 5px rgba(168, 85, 247, 0.6);
 }
 
 .toast.show {

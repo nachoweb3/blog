@@ -269,7 +269,7 @@ class MatrixBackground {
             fontSize: 14,
             speed: 50,
             density: 0.05,
-            color: '#00ff00',
+            color: '#8a2be2',
             bgColor: '#000000'
         });
 
@@ -376,8 +376,8 @@ class MatrixBackground {
 
     addCyberpunkEffects() {
         // Añadir efectos visuales adicionales
-        document.documentElement.style.setProperty('--matrix-green', '#00ff00');
-        document.documentElement.style.setProperty('--matrix-yellow', '#ffff00');
+        document.documentElement.style.setProperty('--matrix-purple', '#8a2be2');
+        document.documentElement.style.setProperty('--matrix-light-purple', '#e9d8fd');
         document.documentElement.style.filter = 'hue-rotate(0deg)';
 
         // Efecto de scanline sutil
@@ -388,7 +388,7 @@ class MatrixBackground {
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.3), transparent);
             z-index: 9999;
             pointer-events: none;
             animation: scanline 8s linear infinite;
@@ -413,8 +413,8 @@ class MatrixBackground {
             this.scanline = null;
         }
 
-        document.documentElement.style.removeProperty('--matrix-green');
-        document.documentElement.style.removeProperty('--matrix-yellow');
+        document.documentElement.style.removeProperty('--matrix-purple');
+        document.documentElement.style.removeProperty('--matrix-light-purple');
         document.documentElement.style.removeProperty('filter');
     }
 
@@ -448,6 +448,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const toggle = document.querySelector('.matrix-toggle');
             if (toggle) {
                 toggle.style.display = 'none';
+                toggle.style.visibility = 'hidden';
+                toggle.style.opacity = '0';
+                toggle.style.pointerEvents = 'none';
             }
         }
     }, 500);

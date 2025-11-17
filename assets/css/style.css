@@ -1,18 +1,18 @@
 /* ===== Variables CSS ===== */
 :root {
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    --accent-color: #10b981;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --bg-tertiary: #f3f4f6;
-    --border-color: #e5e7eb;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --primary-color: #8a2be2;
+    --secondary-color: #a855f7;
+    --accent-color: #e9d8fd;
+    --text-primary: #ffffff;
+    --text-secondary: #e9d8fd;
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #1a1a1a;
+    --border-color: #8a2be2;
+    --shadow-sm: 0 1px 2px 0 rgba(138, 43, 226, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(138, 43, 226, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(138, 43, 226, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(138, 43, 226, 0.6);
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
@@ -123,12 +123,14 @@ body {
 
 /* ===== Hero Section ===== */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #8a2be2 0%, #6b21a8 100%);
+    color: #ffffff;
     padding: var(--spacing-xl) 0;
     text-align: center;
     border-radius: var(--radius-lg);
     margin-bottom: var(--spacing-xl);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    box-shadow: 0 8px 32px rgba(138, 43, 226, 0.3);
 }
 
 .hero h1 {
@@ -153,16 +155,18 @@ body {
 }
 
 .post-card {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(138, 43, 226, 0.4);
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .post-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 20px 25px -5px rgba(138, 43, 226, 0.6);
+    border-color: rgba(168, 85, 247, 0.6);
 }
 
 .post-card-link {
@@ -218,18 +222,21 @@ body {
 }
 
 .category-ia {
-    background: #dbeafe;
-    color: #1e40af;
+    background: rgba(138, 43, 226, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(138, 43, 226, 0.4);
 }
 
 .category-blockchain {
-    background: #fef3c7;
-    color: #92400e;
+    background: rgba(168, 85, 247, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(168, 85, 247, 0.4);
 }
 
 .category-tutoriales {
-    background: #d1fae5;
-    color: #065f46;
+    background: rgba(233, 216, 253, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(233, 216, 253, 0.4);
 }
 
 .post-card-header time {
@@ -468,10 +475,12 @@ body {
 
 /* ===== Footer ===== */
 .site-footer {
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.95);
+    border-top: 2px solid rgba(138, 43, 226, 0.4);
     padding: var(--spacing-xl) 0 var(--spacing-md);
     margin-top: var(--spacing-xl);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 -10px 30px rgba(138, 43, 226, 0.2);
 }
 
 .footer-content {
@@ -502,13 +511,15 @@ body {
 }
 
 .footer-links a {
-    color: var(--text-secondary);
+    color: #b794f6;
     text-decoration: none;
     transition: color 0.3s ease;
+    text-shadow: 0 0 5px rgba(168, 85, 247, 0.6);
 }
 
 .footer-links a:hover {
-    color: var(--primary-color);
+    color: #e9d8fd;
+    text-shadow: 0 0 15px rgba(168, 85, 247, 1);
 }
 
 .social-links {
@@ -521,34 +532,44 @@ body {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    color: var(--text-secondary);
+    color: #b794f6;
     text-decoration: none;
     transition: color 0.3s ease;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    background: rgba(138, 43, 226, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.2);
+    text-shadow: 0 0 5px rgba(168, 85, 247, 0.6);
 }
 
 .social-link:hover {
-    color: var(--primary-color);
+    color: #ffffff;
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.4);
+    text-shadow: 0 0 10px rgba(168, 85, 247, 1);
 }
 
 .email-link {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    color: var(--text-secondary);
+    color: #b794f6;
     text-decoration: none;
     transition: all 0.3s ease;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 6px;
-    background: rgba(0, 255, 65, 0.1);
-    border: 1px solid rgba(0, 255, 65, 0.2);
+    background: rgba(138, 43, 226, 0.2);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    text-shadow: 0 0 5px rgba(168, 85, 247, 0.6);
 }
 
 .email-link:hover {
-    color: var(--primary-color);
-    background: rgba(0, 255, 65, 0.2);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+    color: #ffffff;
+    background: rgba(168, 85, 247, 0.3);
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
     transform: translateY(-2px);
+    text-shadow: 0 0 10px rgba(168, 85, 247, 1);
 }
 
 .donation-section {
