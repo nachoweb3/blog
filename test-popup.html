@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Newsletter Popup - NachoWeb3</title>
+    <style>
+        /* Basic styles for testing */
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .test-button {
+            background: linear-gradient(135deg, #8a2be2, #a855f7);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .test-button:hover {
+            transform: translateY(-2px);
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(138, 43, 226, 0.1);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test del Newsletter Popup - NachoWeb3</h1>
+
+        <div class="status" id="status">
+            <p>📋 Estado: Listo para probar</p>
+        </div>
+
+        <div class="test-controls">
+            <button class="test-button" onclick="showPopup()">🚀 Mostrar Popup</button>
+            <button class="test-button" onclick="hidePopup()">❌ Ocultar Popup</button>
+            <button class="test-button" onclick="resetNewsletter()">🔄 Reset Newsletter</button>
+            <button class="test-button" onclick="showAnalytics()">📊 Ver Analytics</button>
+        </div>
+
+        <div class="info-section">
+            <h2>🎯 Características Implementadas:</h2>
+            <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                <li>✅ Diseño Matrix con colores púrpura/cian</li>
+                <li>✅ Animaciones suaves y efectos de brillo</li>
+                <li>✅ Integración con FormSubmit.co</li>
+                <li>✅ Validación de email en tiempo real</li>
+                <li>✅ Sistema de cooldown de 7 días</li>
+                <li>✅ Analytics tracking completo</li>
+                <li>✅ Responsive design</li>
+                <li>✅ Mensaje de éxito animado</li>
+                <li>✅ Contador de suscriptores animado</li>
+                <li>✅ Soporte para teclado (ESC)</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h2>🔧 Comandos de Debug:</h2>
+            <p>En consola puedes usar:</p>
+            <ul style="text-align: left; max-width: 600px; margin: 0 auto; font-family: monospace;">
+                <li><code>showPopup()</code> - Muestra el popup</li>
+                <li><code>hidePopup()</code> - Oculta el popup</li>
+                <li><code>resetNewsletter()</code> - Resetea todo</li>
+                <li><code>debugNewsletterAnalytics()</code> - Muestra analytics</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Newsletter Popup CSS -->
+    <link rel="stylesheet" href="/assets/css/newsletter-popup.css">
+
+    <!-- Newsletter Popup JS -->
+    <script src="/assets/js/newsletter-popup.js"></script>
+
+    <script>
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            const colors = {
+                'info': 'rgba(138, 43, 226, 0.1)',
+                'success': 'rgba(34, 197, 94, 0.1)',
+                'error': 'rgba(239, 68, 68, 0.1)'
+            };
+            status.style.background = colors[type] || colors.info;
+            status.innerHTML = `<p>${message}</p>`;
+        }
+
+        function showPopup() {
+            if (typeof showNewsletterPopup === 'function') {
+                showNewsletterPopup();
+                updateStatus('🚀 Popup mostrado', 'success');
+            } else {
+                // Forzar creación del popup
+                initNewsletterForced();
+                updateStatus('🚀 Popup forzado', 'success');
+            }
+        }
+
+        function hidePopup() {
+            const popup = document.getElementById('newsletter-popup');
+            if (popup) {
+                popup.classList.remove('show');
+                updateStatus('❌ Popup oculto', 'info');
+            } else {
+                updateStatus('⚠️ No hay popup para ocultar', 'error');
+            }
+        }
+
+        function resetNewsletter() {
+            if (typeof resetNewsletter === 'function') {
+                resetNewsletter();
+                updateStatus('🔄 Newsletter reseteado', 'success');
+            } else {
+                localStorage.removeItem('newsletter_popup_shown');
+                localStorage.removeItem('newsletter_subscribed');
+                localStorage.removeItem('newsletter_analytics');
+                updateStatus('🔄 Reset manual completado', 'success');
+            }
+        }
+
+        function showAnalytics() {
+            if (typeof debugNewsletterAnalytics === 'function') {
+                debugNewsletterAnalytics();
+                updateStatus('📊 Analytics mostrados en consola', 'success');
+            } else {
+                const events = JSON.parse(localStorage.getItem('newsletter_analytics') || '[]');
+                console.table(events);
+                console.log('Total events:', events.length);
+                updateStatus('📊 Analytics básicos mostrados', 'success');
+            }
+        }
+
+        function initNewsletterForced() {
+            // Eliminar popup existente si hay
+            const existing = document.getElementById('newsletter-popup');
+            if (existing) existing.remove();
+
+            // Resetear localStorage para mostrar
+            localStorage.removeItem('newsletter_popup_shown');
+            localStorage.removeItem('newsletter_subscribed');
+
+            // Forzar inicialización
+            if (typeof initNewsletterPopup === 'function') {
+                initNewsletterPopup();
+            }
+
+            // Mostrar manualmente después de un pequeño delay
+            setTimeout(() => {
+                const popup = document.getElementById('newsletter-popup');
+                if (popup) {
+                    popup.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                }
+            }, 100);
+        }
+
+        // Check si todo está cargado
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const popup = document.getElementById('newsletter-popup');
+                const hasCSS = document.querySelector('link[href*="newsletter-popup.css"]');
+                const hasJS = document.querySelector('script[src*="newsletter-popup.js"]');
+
+                let status = '📋 ';
+                if (hasCSS) status += '✅ CSS cargado, ';
+                if (hasJS) status += '✅ JS cargado, ';
+                if (popup) status += '✅ Popup creado';
+                else status += '⚠️ Popup no creado (normal)';
+
+                updateStatus(status, popup ? 'success' : 'info');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
