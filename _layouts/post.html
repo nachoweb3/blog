@@ -4,29 +4,25 @@ layout: default
 
 <article class="post">
     <header class="post-header">
-        <div class="container">
-            <div class="post-category">
-                <span class="category-badge category-{{ page.categories[0] }}">{{ page.categories[0] | upcase }}</span>
-            </div>
-            <h1 class="post-title">{{ page.title }}</h1>
-            <div class="post-meta">
-                <time datetime="{{ page.date | date_to_xmlschema }}">
-                    {{ page.date | date: "%d de %B, %Y" }}
-                </time>
-                <span class="separator">•</span>
-                <span class="reading-time">{{ content | number_of_words | divided_by: 200 }} min de lectura</span>
-            </div>
+        <div class="post-category">
+            <span class="category-badge category-{{ page.categories[0] }}">{{ page.categories[0] | upcase }}</span>
+        </div>
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                {{ page.date | date: "%d de %B, %Y" }}
+            </time>
+            <span class="separator">•</span>
+            <span class="reading-time">{{ content | number_of_words | divided_by: 200 }} min de lectura</span>
         </div>
     </header>
 
     <!-- Reading Progress Bar se añade automáticamente vía JavaScript -->
 
     <!-- AdSense Header Banner después del título -->
-    <div class="container">
-        {% include adsense-header.html %}
-    </div>
+    {% include adsense-header.html %}
 
-    <div class="post-content container">
+    <div class="post-content">
         {{ content }}
 
         <!-- AdSense In-Article (mitad del contenido) -->
@@ -39,11 +35,9 @@ layout: default
     </div>
 
     <!-- AdSense Footer Banner al final del contenido -->
-    <div class="container">
-        {% include adsense-banner.html %}
-    </div>
+    {% include adsense-banner.html %}
 
-    <footer class="post-footer container">
+    <footer class="post-footer">
         <div class="post-tags">
             {% if page.tags %}
                 <span class="tags-label">Etiquetas:</span>
@@ -61,49 +55,45 @@ layout: default
 </article>
 
 <!-- Widget de YouTube -->
-<div class="container">
-    {% include youtube-widget.html %}
-</div>
+{% include youtube-widget.html %}
 
 <!-- Contenedor para Posts Relacionados y Widget Lateral -->
-<div class="container">
-    <div class="post-sidebar-layout">
-        <!-- Posts Relacionados -->
-        <section class="related-posts">
-            <h2>Artículos relacionados</h2>
-            <p class="related-posts-intro">Basado en los tags de este artículo</p>
-            <div class="posts-grid">
-                {% assign maxRelated = 3 %}
-                {% assign minCommonTags = 1 %}
-                {% assign maxRelatedCounter = 0 %}
+<div class="post-sidebar-layout">
+    <!-- Posts Relacionados -->
+    <section class="related-posts">
+        <h2>Artículos relacionados</h2>
+        <p class="related-posts-intro">Basado en los tags de este artículo</p>
+        <div class="posts-grid">
+            {% assign maxRelated = 3 %}
+            {% assign minCommonTags = 1 %}
+            {% assign maxRelatedCounter = 0 %}
 
-                {% for post in site.posts %}
-                    {% if post.url != page.url %}
-                        {% assign sameTagCount = 0 %}
-                        {% for tag in post.tags %}
-                            {% if page.tags contains tag %}
-                                {% assign sameTagCount = sameTagCount | plus: 1 %}
-                            {% endif %}
-                        {% endfor %}
-
-                        {% if sameTagCount >= minCommonTags and maxRelatedCounter < maxRelated %}
-                            {% include post-card.html post=post %}
-                            {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+            {% for post in site.posts %}
+                {% if post.url != page.url %}
+                    {% assign sameTagCount = 0 %}
+                    {% for tag in post.tags %}
+                        {% if page.tags contains tag %}
+                            {% assign sameTagCount = sameTagCount | plus: 1 %}
                         {% endif %}
+                    {% endfor %}
+
+                    {% if sameTagCount >= minCommonTags and maxRelatedCounter < maxRelated %}
+                        {% include post-card.html post=post %}
+                        {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
                     {% endif %}
-                {% endfor %}
-            </div>
+                {% endif %}
+            {% endfor %}
+        </div>
 
-            {% if maxRelatedCounter == 0 %}
-            <p class="no-related-posts">No hay artículos relacionados disponibles en este momento.</p>
-            {% endif %}
-        </section>
+        {% if maxRelatedCounter == 0 %}
+        <p class="no-related-posts">No hay artículos relacionados disponibles en este momento.</p>
+        {% endif %}
+    </section>
 
-        <!-- Sidebar con Posts Populares y AdSense -->
-        <aside class="post-sidebar">
-            {% include adsense-sidebar.html %}
-            {% include popular-posts.html %}
-            {% include adsense-sidebar.html %}
-        </aside>
-    </div>
+    <!-- Sidebar con Posts Populares y AdSense -->
+    <aside class="post-sidebar">
+        {% include adsense-sidebar.html %}
+        {% include popular-posts.html %}
+        {% include adsense-sidebar.html %}
+    </aside>
 </div>
