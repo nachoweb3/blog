@@ -1,0 +1,1166 @@
+<!-- Futuristic Navigation Component -->
+<nav class="futuristic-nav">
+    <div class="nav-container">
+        <!-- Logo Section -->
+        <div class="nav-brand">
+            <a href="{{ '/' | relative_url }}" class="brand-link">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <span class="logo-text">NW3</span>
+                        <div class="logo-ring ring-1"></div>
+                        <div class="logo-ring ring-2"></div>
+                        <div class="logo-ring ring-3"></div>
+                    </div>
+                    <div class="brand-text">
+                        <span class="main-title">NachoWeb3</span>
+                        <span class="sub-title">Blog</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="{{ '/' | relative_url }}" class="nav-link" data-page="home">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Inicio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ '/categorias/ia' | relative_url }}" class="nav-link" data-page="ia">
+                        <span class="nav-icon">🤖</span>
+                        <span class="nav-text">IA</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ '/categorias/blockchain' | relative_url }}" class="nav-link" data-page="blockchain">
+                        <span class="nav-icon">⛓️</span>
+                        <span class="nav-text">Blockchain</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ '/categorias/tutoriales' | relative_url }}" class="nav-link" data-page="tutorials">
+                        <span class="nav-icon">📚</span>
+                        <span class="nav-text">Tutoriales</span>
+                    </a>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <button class="nav-link tools-toggle" onclick="toggleToolsDropdown()">
+                        <span class="nav-icon">🛠️</span>
+                        <span class="nav-text">Herramientas</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="tools-dropdown" id="tools-dropdown">
+                        <a href="{{ '/crypto-market-indicators' | relative_url }}" class="dropdown-item">
+                            <span class="dropdown-icon">📊</span>
+                            <span class="dropdown-text">Market Indicators</span>
+                        </a>
+                        <a href="{{ '/airdrop-hunter' | relative_url }}" class="dropdown-item">
+                            <span class="dropdown-icon">🎯</span>
+                            <span class="dropdown-text">Airdrop Hunter</span>
+                        </a>
+                        <a href="{{ '/newsletter' | relative_url }}" class="dropdown-item">
+                            <span class="dropdown-icon">📧</span>
+                            <span class="dropdown-text">Newsletter</span>
+                        </a>
+                        <a href="{{ '/nweb3-ai' | relative_url }}" class="dropdown-item featured">
+                            <span class="dropdown-icon">🤖</span>
+                            <span class="dropdown-text">Nweb3_AI</span>
+                            <span class="dropdown-badge">NUEVO</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ '/nweb3-ai' | relative_url }}" class="nav-link featured" data-page="ai">
+                        <span class="nav-icon">🤖</span>
+                        <span class="nav-text">Nweb3_AI</span>
+                        <span class="nav-badge">AI</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ '/sobre-mi' | relative_url }}" class="nav-link" data-page="about">
+                        <span class="nav-icon">👤</span>
+                        <span class="nav-text">Sobre Mí</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="nav-actions">
+            <!-- Search Button -->
+            <button class="action-btn search-btn" onclick="toggleSearch()" title="Buscar">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </button>
+
+            <!-- Theme Toggle -->
+            <button class="action-btn theme-btn" onclick="toggleTheme()" title="Cambiar tema">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 3v1m0 16v1m9-9h-6m6 0v3m0 0v-3m-3 0v-6m0 0v6"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+            </button>
+
+            <!-- Matrix Toggle -->
+            <button class="action-btn matrix-btn" onclick="toggleMatrix()" title="Modo Matrix">
+                <span class="matrix-icon">💚</span>
+            </button>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="action-btn mobile-toggle" onclick="toggleMobileMenu()" title="Menú">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-header">
+            <div class="mobile-logo">
+                <span class="logo-text">NW3</span>
+                <span class="brand-text">NachoWeb3 Blog</span>
+            </div>
+            <button class="mobile-close" onclick="toggleMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-nav-list">
+            <a href="{{ '/' | relative_url }}" class="mobile-nav-link">
+                <span class="mobile-icon">🏠</span>
+                <span>Inicio</span>
+            </a>
+            <a href="{{ '/categorias/ia' | relative_url }}" class="mobile-nav-link">
+                <span class="mobile-icon">🤖</span>
+                <span>IA</span>
+            </a>
+            <a href="{{ '/categorias/blockchain' | relative_url }}" class="mobile-nav-link">
+                <span class="mobile-icon">⛓️</span>
+                <span>Blockchain</span>
+            </a>
+            <a href="{{ '/categorias/tutoriales' | relative_url }}" class="mobile-nav-link">
+                <span class="mobile-icon">📚</span>
+                <span>Tutoriales</span>
+            </a>
+
+            <div class="mobile-divider"></div>
+
+            <div class="mobile-tools-section">
+                <h4 class="mobile-section-title">🛠️ Herramientas</h4>
+                <a href="{{ '/crypto-market-indicators' | relative_url }}" class="mobile-nav-link">
+                    <span class="mobile-icon">📊</span>
+                    <span>Market Indicators</span>
+                </a>
+                <a href="{{ '/airdrop-hunter' | relative_url }}" class="mobile-nav-link">
+                    <span class="mobile-icon">🎯</span>
+                    <span>Airdrop Hunter</span>
+                </a>
+                <a href="{{ '/newsletter' | relative_url }}" class="mobile-nav-link">
+                    <span class="mobile-icon">📧</span>
+                    <span>Newsletter</span>
+                </a>
+                <a href="{{ '/nweb3-ai' | relative_url }}" class="mobile-nav-link featured">
+                    <span class="mobile-icon">🤖</span>
+                    <span>Nweb3_AI</span>
+                    <span class="mobile-badge">NUEVO</span>
+                </a>
+            </div>
+
+            <div class="mobile-divider"></div>
+
+            <a href="{{ '/sobre-mi' | relative_url }}" class="mobile-nav-link">
+                <span class="mobile-icon">👤</span>
+                <span>Sobre Mí</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                <input type="text" id="search-input" placeholder="Buscar artículos, herramientas, temas..." autocomplete="off">
+                <button class="search-close" onclick="toggleSearch()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="search-results" id="search-results">
+                <div class="search-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Buscando...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Futuristic Navigation Styles */
+.futuristic-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, rgba(10, 10, 30, 0.95) 0%, rgba(15, 15, 46, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 70px;
+}
+
+/* Logo Section */
+.nav-brand {
+    flex-shrink: 0;
+}
+
+.brand-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.brand-link:hover {
+    transform: translateY(-2px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.logo-icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00ff41;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    z-index: 2;
+}
+
+.logo-ring {
+    position: absolute;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 50%;
+    animation: pulse-ring 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.ring-1 {
+    width: 60px;
+    height: 60px;
+}
+
+.ring-2 {
+    width: 70px;
+    height: 70px;
+    animation-delay: 0.5s;
+}
+
+.ring-3 {
+    width: 80px;
+    height: 80px;
+    animation-delay: 1s;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+        border-color: rgba(0, 255, 65, 0.3);
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+        border-color: rgba(0, 255, 65, 0.1);
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 1;
+        border-color: rgba(0, 255, 65, 0.3);
+    }
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    background: linear-gradient(45deg, #00ff41, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sub-title {
+    font-size: 0.9rem;
+    color: #808090;
+    margin-top: 0.25rem;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    color: #b0b0c0;
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px solid transparent;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(0, 255, 65, 0.15);
+    border-color: rgba(0, 255, 65, 0.4);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 65, 0.5));
+}
+
+.nav-text {
+    position: relative;
+}
+
+.nav-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    color: #0a0a0a;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Dropdown */
+.has-dropdown {
+    position: relative;
+}
+
+.tools-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.7rem;
+}
+
+.tools-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    background: linear-gradient(135deg, rgba(20, 20, 40, 0.95) 0%, rgba(10, 10, 30, 0.95) 100%);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.has-dropdown:hover .tools-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0.25rem;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 255, 65, 0.1);
+    border-color: rgba(0, 255, 65, 0.2);
+    transform: translateX(5px);
+}
+
+.dropdown-item.featured {
+    background: rgba(255, 0, 255, 0.1);
+    border: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+.dropdown-badge {
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    color: #0a0a0a;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* Actions */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.action-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 10px;
+    color: #00ff41;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn:hover {
+    background: rgba(0, 255, 65, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 255, 65, 0.3);
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(0, 255, 65, 0.3), transparent);
+    transition: width 0.3s ease, height 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.action-btn:hover::before {
+    width: 44px;
+    height: 44px;
+}
+
+/* Special Buttons */
+.matrix-btn {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: rgba(0, 255, 0, 0.3);
+    color: #00ff00;
+}
+
+.matrix-btn.active {
+    background: rgba(0, 255, 0, 0.2);
+    border-color: #00ff00;
+}
+
+.matrix-icon {
+    font-size: 1.2rem;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.7));
+}
+
+/* Mobile Menu */
+.mobile-toggle {
+    display: none;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(10, 10, 30, 0.98) 0%, rgba(15, 15, 46, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile-logo .logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ff41;
+}
+
+.mobile-logo .brand-text {
+    font-size: 1rem;
+    color: #b0b0c0;
+}
+
+.mobile-close {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mobile-close:hover {
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.mobile-nav-list {
+    padding: 1.5rem;
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: #e0e0e0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+.mobile-nav-link:hover {
+    background: rgba(0, 255, 65, 0.1);
+    transform: translateX(5px);
+}
+
+.mobile-icon {
+    width: 24px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.mobile-badge {
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    color: #0a0a0a;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.mobile-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 1rem 0;
+}
+
+.mobile-section-title {
+    color: #808090;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.mobile-tools-section {
+    margin-bottom: 1rem;
+}
+
+/* Search Overlay */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1002;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.search-container {
+    width: 90%;
+    max-width: 600px;
+    background: linear-gradient(135deg, rgba(20, 20, 40, 0.95) 0%, rgba(10, 10, 30, 0.95) 100%);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+}
+
+.search-icon {
+    color: #00ff41;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.5));
+    flex-shrink: 0;
+}
+
+#search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+#search-input::placeholder {
+    color: #808090;
+}
+
+.search-close {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.search-close:hover {
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.search-results {
+    margin-top: 2rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .nav-container {
+        padding: 0 1rem;
+        height: 65px;
+    }
+
+    .brand-text .main-title {
+        font-size: 1.3rem;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .mobile-toggle {
+        display: flex;
+    }
+
+    .matrix-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .futuristic-nav {
+        height: auto;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .nav-brand {
+        order: 1;
+    }
+
+    .nav-actions {
+        order: 2;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+
+    .search-btn {
+        display: none;
+    }
+
+    .theme-btn {
+        display: flex;
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .nav-badge {
+        position: static;
+        margin-left: 0.5rem;
+    }
+
+    .dropdown-arrow {
+        display: none;
+    }
+
+    .dropdown-item .dropdown-text {
+        font-size: 0.9rem;
+    }
+
+    .dropdown-item .dropdown-icon {
+        font-size: 1rem;
+    }
+
+    .tools-dropdown {
+        left: -1rem;
+        right: -1rem;
+        min-width: auto;
+        padding: 0;
+    }
+
+    .dropdown-item {
+        padding: 1rem;
+        justify-content: center;
+    }
+
+    .dropdown-item .dropdown-text {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .dropdown-item.featured .dropdown-badge {
+        position: static;
+        margin-left: 0.5rem;
+    }
+}
+
+/* Matrix Active State */
+.matrix-active .futuristic-nav {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 20, 0, 0.98) 100%);
+    border-bottom-color: rgba(0, 255, 0, 0.3);
+}
+
+.matrix-active .nav-link {
+    color: #e0e0e0;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.matrix-active .nav-link:hover,
+.matrix-active .nav-link.active {
+    background: rgba(0, 255, 0, 0.2);
+    border-color: rgba(0, 255, 0, 0.5);
+    color: #00ff00;
+    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.3);
+}
+
+/* Animation Classes */
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Loading States */
+.search-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: #808090;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 255, 65, 0.2);
+    border-top: 3px solid #00ff41;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
+<script>
+// Navigation Controller
+class FuturisticNavController {
+    constructor() {
+        this.isMobileMenuOpen = false;
+        this.isSearchOpen = false;
+        this.isMatrixMode = false;
+        this.currentTheme = 'dark';
+
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.initializeTheme();
+        this.setupKeyboardShortcuts();
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', this.handleOutsideClick.bind(this));
+    }
+
+    setupEventListeners() {
+        // Close mobile menu when clicking links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (this.isMobileMenuOpen) {
+                    this.toggleMobileMenu();
+                }
+            });
+        });
+
+        // Close search overlay when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.isSearchOpen && !e.target.closest('.search-container')) {
+                this.toggleSearch();
+            }
+        });
+    }
+
+    initializeTheme() {
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            this.currentTheme = savedTheme;
+        }
+
+        // Check for system preference
+        if (!savedTheme) {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            this.currentTheme = prefersDark ? 'dark' : 'light';
+        }
+
+        this.applyTheme(this.currentTheme);
+    }
+
+    setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Escape key to close overlays
+            if (e.key === 'Escape') {
+                if (this.isMobileMenuOpen) this.toggleMobileMenu();
+                if (this.isSearchOpen) this.toggleSearch();
+            }
+
+            // Ctrl+K for search
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                this.toggleSearch();
+            }
+
+            // Ctrl+M for menu
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                this.toggleMobileMenu();
+            }
+
+            // Alt+G for Matrix mode
+            if (e.altKey && e.key === 'g') {
+                e.preventDefault();
+                this.toggleMatrix();
+            }
+        });
+    }
+
+    toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const body = document.body;
+
+        this.isMobileMenuOpen = !this.isMobileMenuOpen;
+
+        if (this.isMobileMenuOpen) {
+            mobileMenu.classList.add('active');
+            body.style.overflow = 'hidden';
+            mobileToggle.classList.add('active');
+        } else {
+            mobileMenu.classList.remove('active');
+            body.style.overflow = '';
+            mobileToggle.classList.remove('active');
+        }
+
+        // Update mobile menu content height
+        if (this.isMobileOpen) {
+            const menuHeight = mobileMenu.offsetHeight;
+            mobileMenu.style.height = `${menuHeight}px`;
+        }
+    }
+
+    toggleSearch() {
+        const searchOverlay = document.getElementById('search-overlay');
+        const searchInput = document.getElementById('search-input');
+
+        this.isSearchOpen = !this.isSearchOpen;
+
+        if (this.isSearchOpen) {
+            searchOverlay.classList.add('active');
+            searchInput.value = '';
+            searchInput.focus();
+            document.body.style.overflow = 'hidden';
+        } else {
+            searchOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    toggleTheme() {
+        this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        this.applyTheme(this.currentTheme);
+        localStorage.setItem('theme', this.currentTheme);
+
+        // Update button icon
+        const themeBtn = document.querySelector('.theme-btn .btn-icon');
+        if (this.currentTheme === 'dark') {
+            themeBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 10.94l-1.06-1.06L4.54 10.94l-8.78 8.78a5.5 5.5 0 0 0-7.78 0l8.78 8.78z"/>
+                </svg>`;
+        } else {
+            themeBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5L22 2l-10 5L12 2z"/>
+                    <path d="m8.36 14.36L4.72 11l-1.72 1.72L12 12l8.64-8.64 2.48 2.48L12 12l-8.64 8.64z"/>
+                </svg>`;
+        }
+    }
+
+    toggleMatrix() {
+        this.isMatrixMode = !this.isMatrixMode;
+        const matrixBtn = document.querySelector('.matrix-btn');
+        const matrixIcon = document.querySelector('.matrix-icon');
+
+        if (this.isMatrixMode) {
+            matrixBtn.classList.add('active');
+            matrixIcon.textContent = '✨️';
+
+            // Activate Matrix background
+            if (window.matrixBackground) {
+                window.matrixBackground.enable();
+            }
+
+            document.body.classList.add('matrix-enabled');
+        } else {
+            matrixBtn.classList.remove('active');
+            matrixIcon.textContent = '💚';
+
+            // Deactivate Matrix background
+            if (window.matrixBackground) {
+                window.matrixBackground.disable();
+            }
+
+            document.body.classList.remove('matrix-enabled');
+        }
+
+        // Save preference
+        localStorage.setItem('matrixMode', this.isMatrixMode.toString());
+    }
+
+    toggleToolsDropdown() {
+        const dropdown = document.getElementById('tools-dropdown');
+        const arrow = document.querySelector('.dropdown-arrow');
+
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        arrow.style.transform = dropdown.style.display === 'block' ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    handleOutsideClick(e) {
+        const toolsDropdown = document.getElementById('tools-dropdown');
+        const hasDropdownToggle = e.target.closest('.has-dropdown');
+
+        if (!hasDropdownToggle && toolsDropdown.style.display === 'block') {
+            toolsDropdown.style.display = 'auto';
+            document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+        }
+    }
+
+    applyTheme(theme) {
+        if (theme === 'light') {
+            document.documentElement.style.setProperty('--bg-color', '#ffffff');
+            document.documentElement.style.setProperty('--text-color', '#1a1a1a');
+            document.documentElement.style.setProperty('--border-color', '#e0e0e0');
+            document.documentElement.style.setProperty('--primary-color', '#1a1a2e');
+        } else {
+            document.documentElement.style.setProperty('--bg-color', '#0a0a0a');
+            document.documentElement.style.setProperty('--text-color', '#e0e0e0');
+            document.documentElement.style.setProperty('--border-color', '#2a2a3e');
+            document.documentElement.style.setProperty('--primary-color', '#1a1a2e');
+        }
+    }
+}
+
+// Initialize the navigation
+const futuristicNav = new FuturisticNavController();
+
+// Global functions for inline event handlers
+function toggleMobileMenu() {
+    futuristicNav.toggleMobileMenu();
+}
+
+function toggleSearch() {
+    futuristicNav.toggleSearch();
+}
+
+function toggleTheme() {
+    futuristicNav.toggleTheme();
+}
+
+function toggleMatrix() {
+    futuristicNav.toggleMatrix();
+}
+
+function toggleToolsDropdown() {
+    futuristicNav.toggleToolsDropdown();
+}
+
+// Add navigation animations on load
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.futuristic-nav').classList.add('fade-in');
+
+    // Add hover effects to navigation items
+    document.querySelectorAll('.nav-item').forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+        item.classList.add('slide-up');
+    });
+});
+
+console.log('Futuristic Navigation initialized');
+</script>

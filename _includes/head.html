@@ -12,6 +12,11 @@
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 
+<!-- Favicon Cyberpunk -->
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+<link rel="shortcut icon" href="{{ '/assets/favicon.svg' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/favicon.svg' | relative_url }}">
+
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
@@ -92,3 +97,15 @@
 
 <!-- Font Awesome para iconos -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+<!-- Scripts Personalizados -->
+<script src="{{ '/assets/js/analytics-manager.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/airdrop-api-integration.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/newsletter-system.js' | relative_url }}"></script>
+
+<!-- Matrix Background Effect -->
+<script src="{{ '/assets/js/matrix-rain.js' | relative_url }}"></script>
+<link rel="stylesheet" href="{{ '/assets/css/matrix-bg.css' | relative_url }}">
