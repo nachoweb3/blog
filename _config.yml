@@ -4,7 +4,7 @@ description: "Noticias de IA, Blockchain y las mejores guías"
 author: "NachoWeb3"
 email: contacto@nachoweb3.com
 url: "https://nachoweb3.github.io"
-baseurl: ""
+baseurl: "/blog"
 
 # Redes sociales
 twitter_username: nachoweb3__x
