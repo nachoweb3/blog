@@ -53,6 +53,7 @@ body {
     z-index: 100;
     box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
     backdrop-filter: blur(15px);
+    margin-top: 0;
 }
 
 .navbar {
@@ -1299,13 +1300,27 @@ body {
 }
 
 /* ===== Posts Populares Widget ===== */
-.popular-posts-widget {
-    background: var(--bg-secondary);
+.popular-posts-widget,
+.widget,
+.sidebar-widget {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.85));
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
-    border: 1px solid var(--border-color);
+    border: 2px solid rgba(138, 43, 226, 0.3);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
+    transition: all 0.3s ease;
+}
+
+.popular-posts-widget {
     position: sticky;
     top: 100px;
+}
+
+.widget:hover,
+.sidebar-widget:hover,
+.popular-posts-widget:hover {
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
 }
 
 .widget-title {

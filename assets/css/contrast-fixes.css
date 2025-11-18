@@ -44,24 +44,13 @@ body {
 }
 
 /* Tarjetas y Contenedores */
-.post-card,
-.article-card,
-.card,
+/* Removido para evitar conflictos - los estilos de cards están en style.css y enhancements.css */
 .newsletter-form,
 .search-container,
-.comments-section,
-.widget,
-.sidebar-widget {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border-secondary) !important;
+.comments-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
     backdrop-filter: blur(10px);
-}
-
-.post-card:hover,
-.article-card:hover,
-.card:hover {
-    background: var(--bg-card-hover) !important;
-    border-color: var(--border-primary) !important;
 }
 
 /* ===== Tipografía con Mejor Legibilidad ===== */
@@ -87,16 +76,7 @@ p, span, div {
 }
 
 /* Enlaces con mejor contraste */
-a {
-    color: var(--primary-color) !important;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-a:hover {
-    color: var(--secondary-color) !important;
-    text-decoration: underline;
-}
+/* Removido - los estilos de links están definidos en style.css */
 
 /* ===== Botones con Mejor Contraste ===== */
 .btn,
@@ -162,28 +142,7 @@ textarea::placeholder {
 }
 
 /* ===== Navegación con Mejor Contraste ===== */
-.nav-link,
-.nav-item a,
-.menu-item {
-    color: var(--text-secondary) !important;
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border-light) !important;
-}
-
-.nav-link:hover,
-.nav-item a:hover,
-.menu-item:hover {
-    color: var(--text-primary) !important;
-    background: var(--bg-card-hover) !important;
-    border-color: var(--primary-color) !important;
-}
-
-.nav-link.active,
-.nav-item a.active {
-    color: var(--text-primary) !important;
-    background: var(--bg-card-hover) !important;
-    border-color: var(--primary-color) !important;
-}
+/* Removido para evitar conflictos con style.css - los estilos de navegación están en style.css */
 
 /* ===== Footer con Mejor Legibilidad ===== */
 .footer,
@@ -399,18 +358,7 @@ svg,
 
 /* ===== Responsive con Contraste Mantenido ===== */
 @media (max-width: 768px) {
-    .post-card,
-    .widget,
-    .sidebar-widget {
-        background: var(--bg-card) !important;
-        border: 1px solid var(--border-secondary) !important;
-    }
-
-    .nav-link {
-        background: var(--bg-secondary) !important;
-        color: var(--text-primary) !important;
-        border-bottom: 1px solid var(--border-light) !important;
-    }
+    /* Estilos responsive movidos a style.css para evitar conflictos */
 }
 
 /* ===== High Contrast Mode (si está activado) ===== */
