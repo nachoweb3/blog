@@ -11,11 +11,10 @@ html {
     top: 0;
     left: 0;
     width: 0%;
-    height: 4px;
-    background: linear-gradient(90deg, #8a2be2, #a855f7, #e9d8fd);
+    height: 3px;
+    background: #8a2be2;
     z-index: 1000;
     transition: width 0.1s ease-out;
-    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.6);
 }
 
 /* === Scroll to Top Button === */
@@ -25,7 +24,7 @@ html {
     right: 30px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #8a2be2, #a855f7);
+    background: #8a2be2;
     color: white;
     border: 2px solid rgba(168, 85, 247, 0.4);
     border-radius: 50%;
@@ -34,13 +33,12 @@ html {
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
+    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.3);
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s ease;
     z-index: 999;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .scroll-to-top.visible {
@@ -50,13 +48,12 @@ html {
 }
 
 .scroll-to-top:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
-    background: linear-gradient(135deg, #a855f7, #c084fc);
+    transform: translateY(-3px);
+    background: #a855f7;
 }
 
 .scroll-to-top:active {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 /* === Dark Mode Toggle === */
@@ -75,15 +72,13 @@ html {
     justify-content: center;
     font-size: 24px;
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.2);
     transition: all 0.3s ease;
     z-index: 999;
-    text-shadow: 0 0 8px rgba(138, 43, 226, 0.8);
 }
 
 .dark-mode-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(168, 85, 247, 0.5);
+    transform: scale(1.05);
     border-color: rgba(168, 85, 247, 0.6);
 }
 
@@ -133,7 +128,6 @@ body.dark-mode .share-button {
 body.dark-mode .share-button:hover {
     background: #8a2be2;
     color: #ffffff;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 /* === Fade-in Animations === */
@@ -180,21 +174,21 @@ body.dark-mode .share-button:hover {
 /* Aplicar animaciones a elementos */
 .post-card {
     opacity: 0;
-    animation: fadeInUp 0.6s ease forwards;
+    animation: fadeInUp 0.4s ease forwards;
 }
 
-.post-card:nth-child(1) { animation-delay: 0.1s; }
-.post-card:nth-child(2) { animation-delay: 0.2s; }
-.post-card:nth-child(3) { animation-delay: 0.3s; }
-.post-card:nth-child(4) { animation-delay: 0.4s; }
-.post-card:nth-child(5) { animation-delay: 0.5s; }
-.post-card:nth-child(6) { animation-delay: 0.6s; }
-.post-card:nth-child(7) { animation-delay: 0.1s; }
-.post-card:nth-child(8) { animation-delay: 0.2s; }
-.post-card:nth-child(9) { animation-delay: 0.3s; }
-.post-card:nth-child(10) { animation-delay: 0.4s; }
-.post-card:nth-child(11) { animation-delay: 0.5s; }
-.post-card:nth-child(12) { animation-delay: 0.6s; }
+.post-card:nth-child(1) { animation-delay: 0.05s; }
+.post-card:nth-child(2) { animation-delay: 0.1s; }
+.post-card:nth-child(3) { animation-delay: 0.15s; }
+.post-card:nth-child(4) { animation-delay: 0.05s; }
+.post-card:nth-child(5) { animation-delay: 0.1s; }
+.post-card:nth-child(6) { animation-delay: 0.15s; }
+.post-card:nth-child(7) { animation-delay: 0.05s; }
+.post-card:nth-child(8) { animation-delay: 0.1s; }
+.post-card:nth-child(9) { animation-delay: 0.15s; }
+.post-card:nth-child(10) { animation-delay: 0.05s; }
+.post-card:nth-child(11) { animation-delay: 0.1s; }
+.post-card:nth-child(12) { animation-delay: 0.15s; }
 
 .hero {
     animation: fadeIn 0.8s ease forwards;
@@ -297,7 +291,6 @@ body.dark-mode .share-button:hover {
     background: #e9d8fd;
     color: #000000;
     border-color: #e9d8fd;
-    text-shadow: 0 0 5px rgba(138, 43, 226, 0.8);
 }
 
 /* Iconos para botones de compartir */
@@ -328,15 +321,13 @@ body.dark-mode .share-button:hover {
     padding: 16px 24px;
     border-radius: 8px;
     border: 1px solid rgba(138, 43, 226, 0.4);
-    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
+    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.3);
     font-weight: 600;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s ease;
     z-index: 1001;
-    backdrop-filter: blur(10px);
-    text-shadow: 0 0 5px rgba(168, 85, 247, 0.6);
 }
 
 .toast.show {
