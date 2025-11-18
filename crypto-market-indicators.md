@@ -576,7 +576,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 }
 
 .indicator-card {
-    background: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 15px;
     padding: 2rem;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
@@ -723,23 +723,24 @@ document.addEventListener('DOMContentLoaded', async function() {
 }
 
 .metric-card {
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
-    border-left: 4px solid #4a90e2;
+    border-left: 4px solid #00ffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .metric-card h4 {
     margin: 0 0 1rem 0;
-    color: #333;
+    color: white;
     font-size: 1rem;
 }
 
 .metric-value {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #4a90e2;
+    color: #00ffff;
     margin-bottom: 0.5rem;
 }
 
