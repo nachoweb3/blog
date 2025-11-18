@@ -33,14 +33,16 @@
 
 <style>
 .ticker-container {
-    background: #8a2be2;
+    background: linear-gradient(135deg, #8a2be2 0%, #a855f7 50%, #8a2be2 100%);
     color: white;
-    padding: 10px 0;
+    padding: 12px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
     overflow: hidden;
-    border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+    border-bottom: 2px solid rgba(168, 85, 247, 0.5);
+    box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+    backdrop-filter: blur(10px);
 }
 
 .ticker-wrapper {
@@ -75,6 +77,17 @@
     gap: 8px;
     font-size: 14px;
     font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ticker-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
 .ticker-label {
@@ -87,6 +100,7 @@
 .ticker-price {
     font-weight: 700;
     font-size: 15px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .ticker-change {

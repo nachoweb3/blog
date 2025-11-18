@@ -46,12 +46,13 @@ body {
 
 /* ===== Header & Navigation ===== */
 .site-header {
-    background: var(--bg-primary);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom: 2px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(138, 43, 226, 0.3);
+    backdrop-filter: blur(15px);
 }
 
 .navbar {
@@ -86,14 +87,32 @@ body {
     text-decoration: none;
     color: var(--text-secondary);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-md);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #8a2be2, #a855f7);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
 .nav-link:hover {
     color: var(--primary-color);
-    background: var(--bg-secondary);
+    background: rgba(138, 43, 226, 0.1);
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+.nav-link:hover::after {
+    width: 80%;
 }
 
 .nav-toggle {
@@ -155,16 +174,20 @@ body {
 }
 
 .post-card {
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(138, 43, 226, 0.4);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.85));
+    border: 2px solid rgba(138, 43, 226, 0.3);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: border-color 0.2s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
 }
 
 .post-card:hover {
-    border-color: rgba(168, 85, 247, 0.6);
+    border-color: rgba(168, 85, 247, 0.8);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(138, 43, 226, 0.5);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(20, 10, 30, 0.9));
 }
 
 .post-card-link {
@@ -649,16 +672,20 @@ body {
 }
 
 .category-card {
-    background: var(--bg-primary);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.85));
     border: 2px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
 }
 
 .category-card:hover {
     border-color: var(--primary-color);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(138, 43, 226, 0.5);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(20, 10, 30, 0.9));
 }
 
 .category-card h3 {
@@ -674,16 +701,20 @@ body {
 .category-link {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     text-decoration: none;
     border-radius: var(--radius-md);
     font-weight: 600;
-    transition: background 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .category-link:hover {
-    background: var(--secondary-color);
+    background: linear-gradient(135deg, var(--secondary-color), #c084fc);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(168, 85, 247, 0.5);
 }
 
 /* ===== Responsive ===== */
